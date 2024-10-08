@@ -1,7 +1,7 @@
 import { Group, TextureLoader } from 'three';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
-import ScreenSizes from '../hooks/screenSizes';
-import { UseBaseballContext } from '../context/UseBaseballContext';
+import ScreenSizes from '../../hooks/screenSizes';
+import { UseBaseballContext } from '../../context/UseBaseballContext';
 
 import * as THREE from 'three';
 import React from 'react';
@@ -128,11 +128,11 @@ export function BaseballPlayers(props: playersProps) {
       const ballTime = actions['baseball-ball']?.time;
       if (ballTime) {
         if (camera.position.x < -1.385) {
-          camera.position.x += 0.07 * ballTime * (smallScreen ? 4 : 1);
+          camera.position.x += 0.07 * ballTime * (smallScreen ? 4 : 4);
         }
 
         if (camera.rotation.y < -0.013) {
-          camera.rotation.y += 0.00048 * ballTime * (smallScreen ? 4 : 1);
+          camera.rotation.y += 0.00048 * ballTime * (smallScreen ? 4 : 4);
         }
       }
     }
