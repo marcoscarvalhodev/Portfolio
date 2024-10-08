@@ -31,6 +31,7 @@ export function BaseballField(props: JSX.IntrinsicElements['group']) {
         material={nodes['merged-desert'].material}
         position={[0.169, -0.97, -77.021]}
       />
+      
     </group>
   );
 }
