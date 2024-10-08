@@ -1,40 +1,139 @@
-import React, { useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
-import { TextureLoader } from 'three';
-import { useAnimations } from '@react-three/drei';
+import { Group, TextureLoader } from 'three';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
+import ScreenSizes from '../hooks/screenSizes';
+import { UseBaseballContext } from '../context/UseBaseballContext';
 
-export function BaseballTest(props) {
-  const group = useRef();
-  const { nodes, materials, animations } = useGLTF('/baseball-animation.glb');
+import * as THREE from 'three';
+import React from 'react';
+import { useGraph } from '@react-three/fiber';
+import { useGLTF, useAnimations } from '@react-three/drei';
+import { GLTF, SkeletonUtils } from 'three-stdlib';
+
+type ActionName =
+  | 'baseball-pitcher'
+  | 'cap.001'
+  | 'belt'
+  | 'baseball-batter'
+  | 'helmet'
+  | 'belt-2'
+  | 'baseball-catcher'
+  | 'Cube.002'
+  | 'Cube.001'
+  | 'ImageToStl.com_catcher helmet.001'
+  | 'baseball-ball'
+  | 'Sphere'
+  | 'baseball-bat';
+
+interface GLTFAction extends THREE.AnimationClip {
+  name: ActionName;
+}
+
+type GLTFResult = GLTF & {
+  nodes: {
+    cap001: THREE.Mesh;
+    belt: THREE.Mesh;
+    helmet: THREE.Mesh;
+    ['belt-2']: THREE.Mesh;
+    Cube002: THREE.Mesh;
+    Cube001: THREE.Mesh;
+    ImageToStlcom_catcher_helmet001: THREE.Mesh;
+    Sphere: THREE.Mesh;
+    ['baseball-player']: THREE.SkinnedMesh;
+    cap: THREE.SkinnedMesh;
+    ['baseball-player001']: THREE.SkinnedMesh;
+    ['model-main-2']: THREE.SkinnedMesh;
+    Cylinder__0: THREE.SkinnedMesh;
+    root: THREE.Bone;
+    ['MCH-torsoparent']: THREE.Bone;
+    ['MCH-hand_ikparentL']: THREE.Bone;
+    ['MCH-upper_arm_ik_targetparentL']: THREE.Bone;
+    ['MCH-hand_ikparentR']: THREE.Bone;
+    ['MCH-upper_arm_ik_targetparentR']: THREE.Bone;
+    ['MCH-foot_ikparentL']: THREE.Bone;
+    ['MCH-thigh_ik_targetparentL']: THREE.Bone;
+    ['MCH-foot_ikparentR']: THREE.Bone;
+    ['MCH-thigh_ik_targetparentR']: THREE.Bone;
+    root_1: THREE.Bone;
+    ['MCH-torsoparent_1']: THREE.Bone;
+    ['MCH-hand_ikparentL_1']: THREE.Bone;
+    ['MCH-upper_arm_ik_targetparentL_1']: THREE.Bone;
+    ['MCH-hand_ikparentR_1']: THREE.Bone;
+    ['MCH-upper_arm_ik_targetparentR_1']: THREE.Bone;
+    ['MCH-foot_ikparentL_1']: THREE.Bone;
+    ['MCH-thigh_ik_targetparentL_1']: THREE.Bone;
+    ['MCH-foot_ikparentR_1']: THREE.Bone;
+    ['MCH-thigh_ik_targetparentR_1']: THREE.Bone;
+    root_2: THREE.Bone;
+    ['MCH-torsoparent_2']: THREE.Bone;
+    ['MCH-hand_ikparentL_2']: THREE.Bone;
+    ['MCH-upper_arm_ik_targetparentL_2']: THREE.Bone;
+    ['MCH-hand_ikparentR_2']: THREE.Bone;
+    ['MCH-upper_arm_ik_targetparentR_2']: THREE.Bone;
+    ['MCH-foot_ikparentL_2']: THREE.Bone;
+    ['MCH-thigh_ik_targetparentL_2']: THREE.Bone;
+    ['MCH-foot_ikparentR_2']: THREE.Bone;
+    ['MCH-thigh_ik_targetparentR_2']: THREE.Bone;
+    Bone_1: THREE.Bone;
+  };
+  materials: { '': THREE.MeshStandardMaterial };
+  animations: GLTFAction[];
+};
+
+interface playersProps {
+  playAnimations: boolean;
+}
+
+export function BaseballPlayers(props: playersProps) {
+  const group = React.useRef<THREE.Group | null>(null);
+  const { scene, animations } = useGLTF('/baseball-animation.glb');
+  const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
+  const { nodes, materials } = useGraph(clone) as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
+
   const { camera } = useThree();
   const texture = useLoader(TextureLoader, '/baseball-players.jpg');
+  const { smallScreen } = ScreenSizes();
+
+  const { setProjectsInView } = UseBaseballContext();
 
   React.useLayoutEffect(() => {
     texture.flipY = false;
     const selectedMaterial = materials[''];
     selectedMaterial.map = texture;
+    console.log(materials);
   });
 
   React.useEffect(() => {
-    actions['baseball-ball']?.play();
-    actions['baseball-batter']?.play();
-    actions['baseball-pitcher']?.play();
-    actions['baseball-catcher']?.play();
-    actions['baseball-bat']?.play();
+    if (props.playAnimations) {
+      actions['baseball-ball']?.play();
+      actions['baseball-batter']?.play();
+      actions['baseball-pitcher']?.play();
+      actions['baseball-catcher']?.play();
+      actions['baseball-bat']?.play();
+    }
   });
 
   useFrame((state, delta) => {
-    mixer.update(delta * 0.5);
-    const ballTime = actions['baseball-ball']?.time;
-    if (ballTime) {
-      if (camera.position.x < -1.385) {
-        camera.position.x += 0.07 * ballTime * 4;
+    if (props.playAnimations) {
+      const ballTime = actions['baseball-ball']?.time;
+      if (ballTime && ballTime >= 12.3) {
+        setProjectsInView(true);
       }
+    }
+  });
 
-      if (camera.rotation.y < -0.013) {
-        camera.rotation.y += 0.00048 * ballTime * 4;
+  useFrame((state, delta) => {
+    if (props.playAnimations) {
+      mixer.update(delta * 0.5);
+      const ballTime = actions['baseball-ball']?.time;
+      if (ballTime) {
+        if (camera.position.x < -1.385) {
+          camera.position.x += 0.07 * ballTime * (smallScreen ? 4 : 1);
+        }
+
+        if (camera.rotation.y < -0.013) {
+          camera.rotation.y += 0.00048 * ballTime * (smallScreen ? 4 : 1);
+        }
       }
     }
   });
@@ -87,8 +186,6 @@ export function BaseballTest(props) {
           >
             <mesh
               name='Sphere'
-              castShadow
-              receiveShadow
               geometry={nodes.Sphere.geometry}
               material={nodes.Sphere.material}
               position={[0.017, 0.095, 0.012]}
@@ -100,21 +197,24 @@ export function BaseballTest(props) {
           <primitive object={nodes.Bone_1} />
         </group>
         <skinnedMesh
-          castShadow
           name='baseball-player'
           geometry={nodes['baseball-player'].geometry}
           material={nodes['baseball-player'].material}
           skeleton={nodes['baseball-player'].skeleton}
         />
         <skinnedMesh
-        castShadow
           name='cap'
           geometry={nodes.cap.geometry}
           material={nodes.cap.material}
           skeleton={nodes.cap.skeleton}
         />
         <skinnedMesh
-        castShadow
+          name='baseball-player001'
+          geometry={nodes['baseball-player001'].geometry}
+          material={nodes['baseball-player001'].material}
+          skeleton={nodes['baseball-player001'].skeleton}
+        />
+        <skinnedMesh
           name='model-main-2'
           geometry={nodes['model-main-2'].geometry}
           material={nodes['model-main-2'].material}
@@ -122,14 +222,6 @@ export function BaseballTest(props) {
           position={[0.043, -0.097, 29.092]}
         />
         <skinnedMesh
-        castShadow
-          name='baseball-player001'
-          geometry={nodes['baseball-player001'].geometry}
-          material={nodes['baseball-player001'].material}
-          skeleton={nodes['baseball-player001'].skeleton}
-        />
-        <skinnedMesh
-        castShadow
           name='Cylinder__0'
           geometry={nodes.Cylinder__0.geometry}
           material={nodes.Cylinder__0.material}
