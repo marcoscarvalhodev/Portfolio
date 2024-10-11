@@ -100,23 +100,30 @@ export function BaseballPlayers(props: playersProps) {
     texture.flipY = false;
     const selectedMaterial = materials[''];
     selectedMaterial.map = texture;
-    console.log(materials);
   });
 
   React.useEffect(() => {
     if (props.playAnimations) {
-      actions['baseball-ball']?.play();
-      actions['baseball-batter']?.play();
-      actions['baseball-pitcher']?.play();
-      actions['baseball-catcher']?.play();
-      actions['baseball-bat']?.play();
+      if (
+        actions['baseball-ball'] &&
+        actions['baseball-batter'] &&
+        actions['baseball-pitcher'] &&
+        actions['baseball-catcher'] &&
+        actions['baseball-bat']
+      ) {
+        actions['baseball-ball'].play().repetitions = 1;
+        actions['baseball-batter'].play().repetitions = 1;
+        actions['baseball-pitcher'].play().repetitions = 1;
+        actions['baseball-catcher'].play().repetitions = 1;
+        actions['baseball-bat'].play().repetitions = 1;
+      }
     }
   });
 
   useFrame((state, delta) => {
     if (props.playAnimations) {
       const ballTime = actions['baseball-ball']?.time;
-      if (ballTime && ballTime >= 12.3) {
+      if (ballTime && ballTime >= 12.2) {
         setProjectsInView(true);
       }
     }
