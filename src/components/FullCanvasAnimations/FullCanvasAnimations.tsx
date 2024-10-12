@@ -1,11 +1,11 @@
 import React from 'react';
-import { useFrame } from '@react-three/fiber';
-import { Mesh } from 'three';
 import { SquaredRobot } from './SquaredRobot';
+import FullCanvasCamera from './FullCanvasCamera';
+import { useFrame } from '@react-three/fiber';
 const FullCanvasAnimations = () => {
   return (
     <>
-      <ambientLight intensity={2}/>
+      <FullCanvasCamera />
       <SquaredRobot />
     </>
   );

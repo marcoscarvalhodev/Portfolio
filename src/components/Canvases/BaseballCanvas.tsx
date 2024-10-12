@@ -11,13 +11,14 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Projects from '../ProjectsSection/Projects';
 import { UseBaseballContext } from '../../context/UseBaseballContext';
-import BlurSVG from '../../assets/blur.svg?react';
 gsap.registerPlugin(ScrollTrigger);
 
 const BaseballCanvas = () => {
   const [playAnimations, setPlayAnimations] = React.useState(false);
   const canvasBaseballRef = React.useRef<HTMLDivElement | null>(null);
   const { closeCanvas, projectsInView, setCloseCanvas } = UseBaseballContext();
+
+
 
   useGSAP(() => {
     gsap.to(canvasBaseballRef.current, {
