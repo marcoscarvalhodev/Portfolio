@@ -19,7 +19,7 @@ function App() {
       <BaseballCanvas />
       <FullCanvas />
 
-      <div className='relative h-[100vh] w-screen'></div>
+      <div className='relative h-[500vh] w-screen'></div>
     </div>
   );
 }
