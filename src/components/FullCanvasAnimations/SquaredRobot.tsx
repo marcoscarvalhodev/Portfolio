@@ -15,27 +15,29 @@ type GLTFResult = GLTF & {
     Cube001: THREE.SkinnedMesh;
     Cube006: THREE.SkinnedMesh;
     Cube006_1: THREE.SkinnedMesh;
+    Cube: THREE.Mesh;
     root: THREE.Bone;
   };
   materials: {
     body: THREE.MeshStandardMaterial;
     holes: THREE.MeshStandardMaterial;
+    ['Material.001']: THREE.MeshStandardMaterial;
   };
   animations: GLTFAction[];
 };
 
 export function SquaredRobot(props: JSX.IntrinsicElements['group']) {
   const group = React.useRef<THREE.Group | null>(null);
-  const { scene, animations } = useGLTF('/squared_robot.glb');
+  const { scene, animations } = useGLTF('/test.glb');
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone) as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
-
+  const [scrollingDown, setScrollingDown] = React.useState(true);
   const [scrollPos, setScrollPos] = React.useState(0);
 
   const targetAnimationTime = React.useRef(0); // Store the target animation time
   const currentAnimationTime = React.useRef(0);
-
+  const previousScrollPos = React.useRef(0);
   React.useEffect(() => {
     animations.forEach((clip) => {
       const action = mixer.clipAction(clip);
@@ -52,9 +54,21 @@ export function SquaredRobot(props: JSX.IntrinsicElements['group']) {
         document.documentElement.scrollHeight - window.innerHeight;
       const scrollProgress = scrollY / maxScroll;
       setScrollPos(scrollProgress);
+
+      if (scrollY > previousScrollPos.current) {
+        setScrollingDown(true);
+      } else {
+        setScrollingDown(false);
+      }
+
+      previousScrollPos.current = scrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   });
 
   useFrame((state, delta) => {
@@ -63,11 +77,10 @@ export function SquaredRobot(props: JSX.IntrinsicElements['group']) {
 
     targetAnimationTime.current = clampedScrollPosition * duration;
 
-    
     currentAnimationTime.current = THREE.MathUtils.lerp(
       currentAnimationTime.current,
       targetAnimationTime.current,
-      0.1 
+      0.1
     );
 
     mixer.setTime(currentAnimationTime.current);
@@ -79,7 +92,7 @@ export function SquaredRobot(props: JSX.IntrinsicElements['group']) {
       {...props}
       dispose={null}
       rotation={[0, 1, 0]}
-      position={[5, 0, 0]}
+      position={[2, 50, 0]}
       scale={0.3}
     >
       <group name='Scene'>
@@ -106,9 +119,17 @@ export function SquaredRobot(props: JSX.IntrinsicElements['group']) {
             />
           </group>
         </group>
+        <mesh
+          name='Cube'
+          geometry={nodes.Cube.geometry}
+          material={materials['Material.001']}
+          position={[29.5, -15.236, -0.002]}
+          rotation={[-Math.PI, 0, 0]}
+          scale={[-37.334, -15.284, -83.636]}
+        />
       </group>
     </group>
   );
 }
 
-useGLTF.preload('/squared_robot.glb');
+useGLTF.preload('/test.glb');
