@@ -11,6 +11,8 @@ const FullCanvasCamera = () => {
   const cameraRef = React.useRef(camera);
 
   React.useEffect(() => {
+    camera.lookAt(-10, -12.5, 0);
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: document.body,
@@ -23,13 +25,14 @@ const FullCanvasCamera = () => {
     tl.to(
       camera.position,
       {
-        z: camera.position.z + 5,
+        x: camera.position.x - 17,
+        y: camera.position.y - 3,
       },
       0
     ).to(
       camera.rotation,
       {
-        y: camera.rotation.y + 0.5,
+        y: camera.rotation.y - 0.5,
       },
       0
     );

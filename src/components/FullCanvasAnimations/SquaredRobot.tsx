@@ -103,8 +103,9 @@ export function SquaredRobot(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.Cube001.geometry}
             material={materials.body}
             skeleton={nodes.Cube001.skeleton}
+            
           />
-          <group name='Cube005'>
+          <group name='Cube005' >
             <skinnedMesh
               name='Cube006'
               geometry={nodes.Cube006.geometry}
@@ -116,17 +117,23 @@ export function SquaredRobot(props: JSX.IntrinsicElements['group']) {
               geometry={nodes.Cube006_1.geometry}
               material={materials.holes}
               skeleton={nodes.Cube006_1.skeleton}
-            />
+
+            >
+              
+            </skinnedMesh>
           </group>
         </group>
         <mesh
           name='Cube'
           geometry={nodes.Cube.geometry}
-          material={materials['Material.001']}
+          
           position={[29.5, -15.236, -0.002]}
           rotation={[-Math.PI, 0, 0]}
           scale={[-37.334, -15.284, -83.636]}
-        />
+          
+        >
+          <meshStandardMaterial color={'green'} opacity={1} transparent/>
+        </mesh>
       </group>
     </group>
   );
