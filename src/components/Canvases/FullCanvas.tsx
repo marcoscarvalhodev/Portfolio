@@ -18,9 +18,9 @@ const FullCanvas = () => {
           makeDefault={true}
           far={1000}
           near={0.1}
-          fov={9.895}
-          position={[-28.641, 62.913, 40.138]}
-          rotation={[-0.2, -0.64, 0]}
+          fov={30.895}
+          position={[16.641,20.913, 45.138]}
+          rotation={[-0.3, 0.7, 0]}
         />
         <directionalLight intensity={5} position={[-60, 100, 40]} />
         <FullCanvasAnimations />
