@@ -11,14 +11,14 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Projects from '../ProjectsSection/Projects';
 import { UseBaseballContext } from '../../context/UseBaseballContext';
+import ScreenSizes from '../../hooks/screenSizes';
 gsap.registerPlugin(ScrollTrigger);
 
 const BaseballCanvas = () => {
   const [playAnimations, setPlayAnimations] = React.useState(false);
   const canvasBaseballRef = React.useRef<HTMLDivElement | null>(null);
   const { closeCanvas, projectsInView, setCloseCanvas } = UseBaseballContext();
-
-
+  const { smallScreen } = ScreenSizes();
 
   useGSAP(() => {
     gsap.to(canvasBaseballRef.current, {
@@ -26,7 +26,7 @@ const BaseballCanvas = () => {
         trigger: canvasBaseballRef.current,
         start: 'top top',
         end: 'bottom bottom',
-        markers: true,
+
         onEnter: () => {
           setPlayAnimations(true);
         },
@@ -55,19 +55,28 @@ const BaseballCanvas = () => {
   return (
     <div
       ref={canvasBaseballRef}
-      className='canvas relative h-[100vh] w-full z-50'
+      className='canvas mt-96 relative h-[100vh] w-full z-50'
     >
-      <span
-        className={`upper h-[5rem] w-full absolute z-50 top-[-2.5rem] ${
-          closeCanvas ? 'hidden' : 'block'
-        }`}
-      ></span>
+      <h1
+        id='projects'
+        className='text-[#0a1524] sm:text-title-font-30 md:text-title-font-20 lg:text-title-font-10 absolute -top-[20rem] left-0 z-50'
+      >
+        Projects
+      </h1>
 
-      <div className='absolute dot-wrapper h-[100%] w-[100%]'>
+      {!smallScreen && (
+        <span
+          className={`upper h-[5rem] w-full absolute z-50 top-[-2.5rem] ${
+            closeCanvas ? 'hidden' : 'block'
+          }`}
+        ></span>
+      )}
+
+      <div className='absolute dot-wrapper h-[100%] w-[100%] overflow-hidden'>
         <span className='dot bg-[#c8c8ca] w-[142vmax] h-[142vmax] rounded-[50%] absolute top-[calc(50%+10px)] z-50 left-[calc(50%+9px)] translate-x-[-50%] translate-y-[-50%] scale-[0.1] opacity-0 block'></span>
       </div>
       <Projects />
-      {!closeCanvas && (
+      {!closeCanvas && !smallScreen && (
         <Canvas
           style={{
             position: 'relative',
@@ -120,11 +129,13 @@ const BaseballCanvas = () => {
         </Canvas>
       )}
 
-      <span
-        className={`lower absolute bottom-[-2.5rem] h-[5rem] w-screen ${
-          closeCanvas ? 'hidden' : 'block'
-        }`}
-      ></span>
+      {!smallScreen && (
+        <span
+          className={`lower absolute bottom-[-2.5rem] h-[5rem] w-screen ${
+            closeCanvas ? 'hidden' : 'block'
+          }`}
+        ></span>
+      )}
     </div>
   );
 };
