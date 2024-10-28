@@ -2,12 +2,11 @@
   .welcomeBg {
     transition: all 0.7s ease;
     transform: translateX(-100%);
-    background: rgb(241, 252, 252);
-    background: linear-gradient(
-      27deg,
-      rgba(241, 252, 252, 1) 0%,
-      rgba(247, 250, 250, 1) 100%
-    );
+    background: #033980de;
+  }
+
+  .welcomeText {
+    transition: all 1.7s ease;
   }
 }
 
@@ -15,5 +14,9 @@
   .welcomeBg {
     transform: translateX(0rem);
     transition: all 0.7s ease;
+  }
+
+  .welcomeText {
+    color: white;
   }
 }
