@@ -15,16 +15,28 @@ function App() {
     ScrollTrigger.config({ ignoreMobileResize: true });
   });
 
-  const wrapper = React.useRef<HTMLDivElement | null>(null);
+  React.useEffect(() => {
+    const ctx = gsap.context(() => {});
 
+    ctx.revert();
+  });
+
+  const wrapper = React.useRef<HTMLDivElement | null>(null);
+  
   return (
     <div ref={wrapper} className='relative w-full z-50 '>
       <NavBar />
-      <div className=' h-[100vh] w-full relative'>
+      <section
+        id='section1'
+        className='top-sec h-[100vh] w-full relative'
+      >
         <Hero />
-      </div>
+      </section>
 
-      <BaseballCanvas />
+      <section id='section2' className='top-sec'>
+        <BaseballCanvas />
+      </section>
+
       <FullCanvas />
 
       <div className='relative h-[200vh] w-screen'></div>
