@@ -34,7 +34,7 @@ const Hero = () => {
     >
       <h1
         ref={welcomeRef}
-        className={`${styles.welcomeText} welcome-text sm:text-title-font-40 md:text-title-font-30`}
+        className={`${styles.welcomeText} welcome-text sm:text-title-font-40 md:text-title-font-30 `}
       >
         Welcome to my portfolio. I'm Marcos Carvalho, a software engineer with
         strong focus in development of dynamic 3D experiences.
