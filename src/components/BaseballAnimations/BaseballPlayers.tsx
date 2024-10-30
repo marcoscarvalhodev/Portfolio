@@ -1,7 +1,7 @@
 import { Group, TextureLoader } from 'three';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import ScreenSizes from '../../hooks/screenSizes';
-import { UseBaseballContext } from '../../context/UseBaseballContext';
+import { UseBaseballContext } from '../../context/UseContext';
 
 import * as THREE from 'three';
 import React from 'react';
