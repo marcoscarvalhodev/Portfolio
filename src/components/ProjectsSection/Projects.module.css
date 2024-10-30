@@ -1,0 +1,35 @@
+.flexAlternate {
+  gap: 5rem;
+}
+
+.flexAlternate:nth-child(odd) {
+  flex-direction: row;
+
+  .flexText {
+    .textContent {
+      .textBackground {
+        transform: translateX(calc(100% + 8rem));
+        background-color: #033980de;
+      }
+    }
+  }
+}
+
+.flexAlternate:nth-child(even) {
+  flex-direction: row-reverse;
+
+  .flexText {
+    .textContent {
+      align-self: end;
+
+      .textBackground {
+        transform: translateX(calc(-100% + -8rem));
+        background-color: #033980de;
+      }
+    }
+  }
+
+  .numberAlternate {
+    right: 0;
+  }
+}

@@ -21,7 +21,6 @@ function ScrollSpy() {
           trigger: section,
           start: 'top center',
           end: 'bottom center',
-          markers: true,
           onEnter: () => {
             setActiveSection(section.id);
           },
