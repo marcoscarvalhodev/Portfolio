@@ -6,6 +6,7 @@ import NavBar from './components/NavBar/NavBar';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import Projects from './components/ProjectsSection/Projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,24 +23,23 @@ function App() {
   });
 
   const wrapper = React.useRef<HTMLDivElement | null>(null);
-  
+
   return (
     <div ref={wrapper} className='relative w-full z-50 '>
       <NavBar />
-      <section
-        id='section1'
-        className='top-sec h-[100vh] w-full relative'
-      >
+      <section id='section1' className='top-sec h-[100vh] w-full relative'>
         <Hero />
       </section>
 
       <section id='section2' className='top-sec'>
-        <BaseballCanvas />
+        <Projects />
       </section>
 
       <FullCanvas />
 
-      <div className='relative h-[200vh] w-screen'></div>
+      <div className='relative h-[200vh] w-screen'>
+        <BaseballCanvas />
+      </div>
     </div>
   );
 }
