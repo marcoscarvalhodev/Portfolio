@@ -24,6 +24,20 @@ function App() {
 
   const wrapper = React.useRef<HTMLDivElement | null>(null);
 
+  React.useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+
+    const handleBeforeUnload = () => {
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <div ref={wrapper} className='relative w-full z-50 '>
       <NavBar />

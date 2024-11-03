@@ -13,6 +13,14 @@
       }
     }
   }
+
+  .numberAlternate {
+    right: 0;
+
+    .numberBackground {
+      left: 100%;
+    }
+  }
 }
 
 .flexAlternate:nth-child(even) {
@@ -20,8 +28,6 @@
 
   .flexText {
     .textContent {
-      align-self: end;
-
       .textBackground {
         transform: translateX(calc(-100% + -8rem));
         background-color: #033980de;
@@ -30,6 +36,10 @@
   }
 
   .numberAlternate {
-    right: 0;
+    left: 0;
+
+    .numberBackground {
+      right: 100%;
+    }
   }
 }
