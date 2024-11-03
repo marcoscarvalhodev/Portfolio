@@ -43,9 +43,12 @@ const BaseballCanvas = () => {
         ease: 'power1',
         background: '#f5f7fa',
         onComplete: () => {
+          const tl = gsap.timeline();
           setCloseCanvas(true);
-          gsap.to('.dot', {
+          tl.to('.dot', {
             opacity: 0,
+          }).to('.dot', {
+            display: 'none',
           });
         },
       });
@@ -57,7 +60,6 @@ const BaseballCanvas = () => {
       ref={canvasBaseballRef}
       className='canvas mt-96 relative h-[100vh] w-full z-50'
     >
-      
       {!smallScreen && (
         <span
           className={`upper h-[5rem] w-full absolute z-50 top-[-2.5rem] ${
@@ -69,7 +71,7 @@ const BaseballCanvas = () => {
       <div className='absolute dot-wrapper h-[100%] w-[100%] '>
         <span className='dot bg-[#c8c8ca] w-[142vmax] h-[142vmax] rounded-[50%] absolute top-[calc(50%+10px)] z-50 left-[calc(50%+9px)] translate-x-[-50%] translate-y-[-50%] scale-[0.1] opacity-0 block'></span>
       </div>
-      
+
       {!closeCanvas && !smallScreen && (
         <Canvas
           style={{

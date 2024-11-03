@@ -4,6 +4,7 @@ import { VideoProjectsContextInterface } from '../interfaces/ContextInterfaces';
 export interface addProjectsProps {
   refVideo: HTMLVideoElement | null;
   refBackground: HTMLSpanElement | null;
+  refNumberBackground: HTMLSpanElement | null;
 }
 
 export const CreateVideoProjectsContext =
@@ -16,21 +17,31 @@ export const VideoProjectsProvider = ({
 }) => {
   const videoRefs = React.useRef<(HTMLVideoElement | null)[]>([]);
   const backgroundRefs = React.useRef<(HTMLSpanElement | null)[]>([]);
+  const numberBackgroundRefs = React.useRef<(HTMLSpanElement | null)[]>([]);
 
-  const addProjectsRef = ({ refVideo, refBackground }: addProjectsProps) => {
+  const addProjectsRef = ({
+    refVideo,
+    refBackground,
+    refNumberBackground,
+  }: addProjectsProps) => {
     if (
       refVideo &&
       refBackground &&
+      refNumberBackground &&
       !videoRefs.current.includes(refVideo) &&
-      !backgroundRefs.current.includes(refBackground)
+      !backgroundRefs.current.includes(refBackground) &&
+      !numberBackgroundRefs.current.includes(refNumberBackground)
     ) {
       videoRefs.current.push(refVideo);
       backgroundRefs.current.push(refBackground);
+      numberBackgroundRefs.current.push(refNumberBackground);
     }
   };
 
   return (
-    <CreateVideoProjectsContext.Provider value={{ videoRefs, addProjectsRef, backgroundRefs }}>
+    <CreateVideoProjectsContext.Provider
+      value={{ videoRefs, addProjectsRef, backgroundRefs, numberBackgroundRefs }}
+    >
       {children}
     </CreateVideoProjectsContext.Provider>
   );
