@@ -62,7 +62,7 @@ const NavBar = () => {
                 activeSection === 'section2' ? 'bg-[#033980de] text-[#edf1f7de]' : ''
               } cursor-pointer text-[1.8rem] text-[#091729] hover:bg-[#033980de] hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]`}
             >
-              Projects
+              Works
             </a>
 
             <a className='text-[1.8rem] text-[#091729] hover:bg-[#033980de] hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]'>
