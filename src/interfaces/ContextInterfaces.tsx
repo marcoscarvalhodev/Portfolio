@@ -11,5 +11,10 @@ export interface BaseballContextInterface {
 export interface VideoProjectsContextInterface {
   videoRefs: React.MutableRefObject<(HTMLVideoElement | null)[]>;
   backgroundRefs: React.MutableRefObject<(HTMLSpanElement | null)[]>;
-  addProjectsRef: ({ refVideo, refBackground }: addProjectsProps) => void;
+  numberBackgroundRefs: React.MutableRefObject<(HTMLSpanElement | null)[]>;
+  addProjectsRef: ({
+    refVideo,
+    refBackground,
+    refNumberBackground,
+  }: addProjectsProps) => void;
 }
