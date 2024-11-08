@@ -9,7 +9,7 @@
     .textContent {
       .textBackground {
         transform: translateX(calc(100% + 8rem));
-        background-color: #033980de;
+        background-color: #033980;
       }
     }
   }
@@ -30,7 +30,7 @@
     .textContent {
       .textBackground {
         transform: translateX(calc(-100% + -8rem));
-        background-color: #033980de;
+        background-color: #033980;
       }
     }
   }
