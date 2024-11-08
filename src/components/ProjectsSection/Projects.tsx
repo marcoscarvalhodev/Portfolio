@@ -10,7 +10,7 @@ import {
 import ProjectsContainer from './ProjectsContainer';
 import { ContentProjects } from '../../Contents';
 import styles from './Projects.module.css';
-import { timerLocal } from 'three/webgpu';
+import { cubeTexture, timerLocal } from 'three/webgpu';
 
 interface customTriggerProps {
   video: HTMLVideoElement | null;
@@ -24,8 +24,6 @@ const Projects = () => {
   const { closeCanvas } = UseBaseballContext();
   const { videoRefs, backgroundRefs, numberBackgroundRefs } =
     UseVideoProjectsContext();
-
-  const completedAnimation = React.useRef({ element1: false });
 
   /*useGSAP(() => {
     if (closeCanvas) {
@@ -41,80 +39,6 @@ const Projects = () => {
   }, [closeCanvas]);*/
 
   React.useEffect(() => {
-    function Enter({
-      video,
-      index,
-      indexCheck,
-      siblings,
-      parentNumber,
-    }: customTriggerProps) {
-      video?.play();
-      const tl = gsap.timeline();
-
-      tl.to(
-        backgroundRefs.current[index],
-        {
-          xPercent: indexCheck ? 0 : 0,
-          x: indexCheck ? -65 : -72,
-          duration: 1,
-
-          onUpdate: (self) => {},
-          onStart: () => {
-            gsap.to(siblings, {
-              color: '#fcfeff',
-            });
-          },
-        },
-        0
-      ).to(numberBackgroundRefs.current[index], {
-        right: '0%',
-        left: '0%',
-        duration: 1,
-        onStart: () => {
-          gsap.to(parentNumber, {
-            color: '#fcfeff',
-            duration: 1,
-          });
-        },
-      });
-    }
-
-    function Leave({
-      video,
-      index,
-      indexCheck,
-      parentNumber,
-      siblings,
-    }: customTriggerProps) {
-      video?.pause();
-      const tl = gsap.timeline();
-
-      gsap.to(numberBackgroundRefs.current[index], {
-        right: indexCheck ? '0%' : '100%',
-        left: indexCheck ? '100%' : '0%',
-        duration: 1,
-        onStart: () => {
-          gsap.to(parentNumber, {
-            color: '#0a1524',
-          });
-        },
-
-        onComplete: () => {
-          gsap.to(backgroundRefs.current[index], {
-            xPercent: indexCheck ? 100 : -100,
-            x: indexCheck ? 0 : -72,
-            duration: 1,
-            onStart: () => {
-              gsap.to(siblings, {
-                color: '#0a1524',
-                duration: 1,
-              });
-            },
-          });
-        },
-      });
-    }
-
     const ctx = gsap.context(() => {
       videoRefs.current.forEach((video, index) => {
         const indexCheck = index % 2 === 0;
@@ -125,23 +49,73 @@ const Projects = () => {
           backgroundRefs.current[index]!.parentNode!.children
         ).filter((sibling) => sibling !== backgroundRefs.current[index]);
 
-        return ScrollTrigger.create({
-          trigger: video,
-          start: 'top center',
-          end: 'bottom center',
-          markers: true,
+        const secondAnimation = gsap.to(numberBackgroundRefs.current[index], {
+          right: '0%',
+          left: '0%',
+          duration: 1,
+          onStart: () => {
+            gsap.to(parentNumber, {
+              color: '#fcfeff',
+              duration: 1,
+            });
+          },
+          paused: true,
+        });
 
-          onEnter: () => {
-            Enter({ video, index, indexCheck, siblings, parentNumber });
+        gsap.to(backgroundRefs.current[index], {
+          xPercent: indexCheck ? 0 : 0,
+          x: indexCheck ? -65 : -72,
+          duration: 1,
+          scrollTrigger: {
+            trigger: backgroundRefs.current[index],
+            start: 'top center',
+            end: 'bottom center',
+            toggleActions: 'play reverse play reverse',
+            markers: true,
+
+            onEnter: () => {
+              video?.play();
+              gsap.to(siblings, {
+                color: '#fcfeff',
+                duration: 1,
+              });
+            },
+            onEnterBack: () => {
+              video?.play();
+              gsap.to(siblings, {
+                color: '#fcfeff',
+              });
+            },
+            onLeave: () => {
+              secondAnimation.pause(0);
+              video?.pause();
+              gsap.to(siblings, {
+                color: '#0a1524',
+                duration: 1
+              });
+
+              gsap.to(parentNumber, {
+                color: '#0a1524',
+                duration: 1,
+              });
+            },
+            onLeaveBack: () => {
+              secondAnimation.pause(0);
+              video?.pause();
+              gsap.to(siblings, {
+                color: '#0a1524',
+                duration: 1
+              });
+
+              gsap.to(parentNumber, {
+                color: '#0a1524',
+                duration: 1,
+              });
+            },
           },
-          onEnterBack: () => {
-            Enter({ video, index, indexCheck, siblings, parentNumber });
-          },
-          onLeave: () => {
-            Leave({ video, index, indexCheck, siblings, parentNumber });
-          },
-          onLeaveBack: () => {
-            Leave({ video, index, indexCheck, siblings, parentNumber });
+
+          onComplete: () => {
+            secondAnimation.restart(true);
           },
         });
       });
