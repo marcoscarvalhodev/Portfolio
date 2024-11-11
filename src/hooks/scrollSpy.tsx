@@ -10,8 +10,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 function ScrollSpy() {
   const [activeSection, setActiveSection] = React.useState('');
 
-  console.log(activeSection);
-
   useGSAP(() => {
     const sections = document.querySelectorAll('.top-sec');
 

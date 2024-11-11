@@ -12,6 +12,7 @@ import gsap from 'gsap';
 import Projects from '../ProjectsSection/Projects';
 import { UseBaseballContext } from '../../context/UseContext';
 import ScreenSizes from '../../hooks/screenSizes';
+import Skills from '../Skills/Skills';
 gsap.registerPlugin(ScrollTrigger);
 
 const BaseballCanvas = () => {
@@ -60,6 +61,9 @@ const BaseballCanvas = () => {
       ref={canvasBaseballRef}
       className='canvas mt-96 relative h-[100vh] w-full z-50'
     >
+      
+      <Skills />
+
       {!smallScreen && (
         <span
           className={`upper h-[5rem] w-full absolute z-50 top-[-2.5rem] ${

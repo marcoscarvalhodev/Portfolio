@@ -52,7 +52,9 @@ function App() {
       <FullCanvas />
 
       <div className='relative h-[200vh] w-screen'>
-        <BaseballCanvas />
+        <section id='section3' className='top-sec'>
+          <BaseballCanvas />
+        </section>
       </div>
     </div>
   );

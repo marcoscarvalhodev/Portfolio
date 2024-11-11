@@ -27,3 +27,81 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
+
+/*svg {
+  #spike,
+  #cactus-1,
+  #cactus-2,
+  #soil-1,
+  #soil-2,
+  #background {
+    fill: white;
+  }
+
+  #spike:hover {
+    fill: #837b28;
+  }
+
+  #cactus-1:hover {
+    fill: #2f8137;
+  }
+
+  #cactus-1:hover ~ #cactus-2 {
+    fill: #18661B;
+  }
+
+  #cactus-2:hover {
+    fill: #18661B;
+  }
+
+  #cactus-2:hover ~ #cactus-1 {
+    fill: #2f8137;
+    
+  }
+}
+*/
+#cactus-1,
+#cactus-2,
+#spike,
+#soil,
+#background-all,
+#cactus-back {
+  fill: #edf1f7;
+  transition: all 1s;
+}
+
+#spike,
+#cactus-2,
+#cactus-1 {
+  path {
+    fill: #edf1f7;
+  }
+}
+
+.spike-active {
+  #spike {
+    fill: #90861C;
+    transition: all 1s;
+  
+  }
+}
+
+.cactus-active {
+  #cactus-1 {
+    fill: #155817;
+  }
+
+  #cactus-back {
+    fill: #3a6f3c;
+  }
+}
+
+.soil-active {
+  #soil-1 {
+    fill: #7c5228;
+  }
+
+  #soil {
+    fill: #935f28;
+  }
+}
