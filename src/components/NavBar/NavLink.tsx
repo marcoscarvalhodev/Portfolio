@@ -13,8 +13,8 @@ const NavLink = ({ id, activeLink = "section_1", onClick, children }: NavLinkPro
       href={`#${id}`}
 
       className={`menu-item ${
-        activeLink === id ? 'bg-[#033980de] text-[#edf1f7de]' : ''
-      } text-[1.8rem] text-[#091729] hover:bg-[#033980de] hover:text-[#edf1f7de]  transition-all duration-[1s] p-[2rem]`}
+        activeLink === id ? 'bg-blue_10 text-[#edf1f7de]' : ''
+      } text-[1.8rem] text-[#091729] hover:bg-blue_10 hover:text-[#edf1f7de]  transition-all duration-[1s] p-[2rem]`}
     >
       {children}
     </a>

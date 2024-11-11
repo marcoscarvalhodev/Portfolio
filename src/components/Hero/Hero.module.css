@@ -2,7 +2,7 @@
   .welcomeBg {
     transition: all 0.7s ease;
     transform: translateX(-100%);
-    background: #033980de;
+    background: theme('colors.blue_10');
   }
 
   .welcomeText {
