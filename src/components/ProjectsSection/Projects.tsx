@@ -77,13 +77,14 @@ const Projects = () => {
               video?.play();
               gsap.to(siblings, {
                 color: '#fcfeff',
-                duration: 1,
+                duration: 2,
               });
             },
             onEnterBack: () => {
               video?.play();
               gsap.to(siblings, {
                 color: '#fcfeff',
+                duration: 2,
               });
             },
             onLeave: () => {
@@ -91,12 +92,12 @@ const Projects = () => {
               video?.pause();
               gsap.to(siblings, {
                 color: '#0a1524',
-                duration: 1
+                duration: 2,
               });
 
               gsap.to(parentNumber, {
                 color: '#0a1524',
-                duration: 1,
+                duration: 2,
               });
             },
             onLeaveBack: () => {
@@ -104,12 +105,12 @@ const Projects = () => {
               video?.pause();
               gsap.to(siblings, {
                 color: '#0a1524',
-                duration: 1
+                duration: 2,
               });
 
               gsap.to(parentNumber, {
                 color: '#0a1524',
-                duration: 1,
+                duration: 2,
               });
             },
           },
@@ -125,10 +126,10 @@ const Projects = () => {
   }, [videoRefs, backgroundRefs, numberBackgroundRefs]);
 
   return (
-    <div
+    <section
       className={`${styles.flexWrapper} w-screen z-50 relative px-[7.2rem] flex-col mt-[7.2rem]`}
     >
-      <h1 className='text-[#0a1524] sm:text-title-font-30 md:text-title-font-20 lg:text-title-font-10 pb-[4rem]'>
+      <h1 className='text-[#0a1524] sm:text-f-30 md:text-f-20 lg:text-f-10 pb-[4rem]'>
         Works
       </h1>
 
@@ -137,7 +138,7 @@ const Projects = () => {
           return <ProjectsContainer {...item} key={index} />;
         })}
       </div>
-    </div>
+    </section>
   );
 };
 
