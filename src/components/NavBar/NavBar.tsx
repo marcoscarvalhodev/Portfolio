@@ -49,9 +49,9 @@ const NavBar = () => {
               onClick={() => handleClick('section1')}
               className={`${
                 activeSection === 'section1'
-                  ? 'bg-[#033980de] text-[#edf1f7de] '
+                  ? 'bg-blue_10 text-[#edf1f7de] '
                   : ''
-              } cursor-pointer text-[1.8rem] text-[#091729] hover:bg-[#033980de] hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]`}
+              } cursor-pointer text-[1.8rem] text-[#091729] hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]`}
             >
               Home
             </a>
@@ -59,18 +59,27 @@ const NavBar = () => {
             <a
               onClick={() => handleClick('section2')}
               className={`${
-                activeSection === 'section2' ? 'bg-[#033980de] text-[#edf1f7de]' : ''
-              } cursor-pointer text-[1.8rem] text-[#091729] hover:bg-[#033980de] hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]`}
+                activeSection === 'section2'
+                  ? 'bg-blue_10 text-[#edf1f7de]'
+                  : ''
+              } cursor-pointer text-[1.8rem] text-[#091729] hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]`}
             >
               Works
             </a>
 
-            <a className='text-[1.8rem] text-[#091729] hover:bg-[#033980de] hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]'>
+            <a
+              onClick={() => handleClick('section3')}
+              className={`${
+                activeSection === 'section3'
+                  ? 'bg-blue_10 text-[#edf1f7de]'
+                  : ''
+              } cursor-pointer text-[1.8rem] text-[#091729] hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]`}
+            >
               Skills
             </a>
             <a
               href=''
-              className='text-[1.8rem] text-[#091729] hover:bg-[#033980de] hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]'
+              className='text-[1.8rem] text-[#091729] hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]'
             >
               Contact
             </a>
@@ -80,7 +89,7 @@ const NavBar = () => {
           >
             <a
               href=''
-              className='text-[1.8rem] text-[#091729] hover:bg-[#033980de] hover:text-[#edf1f7de] transition-all duration-[1s] text-center block p-[1rem]'
+              className='text-[1.8rem] text-[#091729] hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] text-center block p-[1rem]'
             >
               Want a more dimensional project?
             </a>
