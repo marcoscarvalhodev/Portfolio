@@ -66,7 +66,7 @@ body {
 #soil,
 #background-all,
 #cactus-back {
-  fill: #edf1f7;
+  fill: theme('colors.white_10');
   transition: all 1s;
 }
 
@@ -80,9 +80,8 @@ body {
 
 .spike-active {
   #spike {
-    fill: #90861C;
+    fill: #90861c;
     transition: all 1s;
-  
   }
 }
 
@@ -97,11 +96,26 @@ body {
 }
 
 .soil-active {
-  #soil-1 {
-    fill: #7c5228;
-  }
-
   #soil {
     fill: #935f28;
+  }
+}
+
+.all-skills-active {
+  #soil {
+    fill: #935f28;
+  }
+
+  #cactus-1 {
+    fill: #155817;
+  }
+
+  #cactus-back {
+    fill: #3a6f3c;
+  }
+
+  #spike {
+    fill: #90861c;
+    transition: all 1s;
   }
 }
