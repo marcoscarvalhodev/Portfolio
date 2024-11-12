@@ -1,4 +1,18 @@
 import Video1 from '@/assets/projects_videos/supreme_bank.mp4';
+import { SiTypescript } from 'react-icons/si';
+import { SiJavascript } from 'react-icons/si';
+import { SiCsharp } from 'react-icons/si';
+import { FaReact } from 'react-icons/fa';
+import { RiNextjsFill } from 'react-icons/ri';
+import { SiCss3 } from 'react-icons/si';
+import { SiTailwindcss } from 'react-icons/si';
+import { SiStyledcomponents } from 'react-icons/si';
+import R3FIcon from './assets/skills/icons/R3F_icon.svg?react';
+import GSAPIcon from '@/assets/skills/icons/gsap_icon.svg?react';
+import { SiThreedotjs } from 'react-icons/si';
+import { SiHtml5 } from 'react-icons/si';
+import { SiJest } from 'react-icons/si';
+import { SiVitest } from 'react-icons/si';
 
 export const ContentProjects = [
   {
@@ -42,20 +56,31 @@ export const ContentSkills = {
   contents: [
     {
       id: 'soil-text',
-      title: 'User-centered',
+      title: 'Creative developer',
+      skills: [<SiJavascript />, <SiCsharp />, <SiCss3 />, <SiHtml5 />],
       content:
         'For almost every source of life, soil is one of the main foundations; without it, nothing else would be the same:',
     },
     {
       id: 'spikes-text',
-      title: '3D development',
+      title: 'User-centered',
+      skills: [<SiTypescript />, <SiJest />, <SiVitest />],
       content:
         'The spikes of a cactus may seem just a little detail of it, but they play important roles, giving it more protection and longevity:',
     },
 
     {
       id: 'cactus-text',
-      title: 'Creative developer',
+      title: '3D development',
+      skills: [
+        <FaReact />,
+        <RiNextjsFill />,
+        <SiTailwindcss />,
+        <SiStyledcomponents />,
+        <SiThreedotjs />,
+        <R3FIcon />,
+        <GSAPIcon />,
+      ],
       content:
         'What stands out most to you is often the most important part of something, yet it’s usually one piece of a larger whole that relies on its presence:',
     },
@@ -68,19 +93,33 @@ export const ContentSkills = {
       "I enjoy coming up with creative solutions that really make a difference for users and clients' needs.",
     button: 'Skills',
     content_2:
-      'Move your cursor over the illustration on the left for an interactive experience, or simply click the button below to explore my tech skills:',
+      'Move your cursor over the illustration on the left for an interactive experience, or simply click the button below to explore all of my tech skills:',
   },
 
-  skills: [
-    'TypeScript',
-    'JavaScript',
-    'React',
-    'Next.JS',
-    'CSS',
-    'Tailwind',
-    'Styled-Components',
-    'Three.JS',
-    'R3F',
-    'GSAP',
-  ],
+  allSkills: {
+    id: 'main-text',
+    title: 'Frontend engineer',
+    content_1:
+      "I enjoy coming up with creative solutions that really make a difference for users and clients' needs.",
+    button: 'Return',
+    skills: [
+      <SiTypescript />,
+      <SiJavascript />,
+      <SiCsharp />,
+      <FaReact />,
+      <RiNextjsFill />,
+      <SiCss3 />,
+      <SiTailwindcss />,
+      <SiStyledcomponents />,
+      <SiThreedotjs />,
+      <R3FIcon />,
+      <GSAPIcon />,
+      <SiHtml5 />,
+      <SiJest />,
+      <SiVitest />,
+    ],
+    content_2: 'These are all my tech skills up to the present moment:',
+    content_3:
+      'You can click on the button below to return to the previous screen.',
+  },
 };
