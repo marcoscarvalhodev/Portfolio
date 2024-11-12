@@ -19,6 +19,7 @@ const FullCanvasCamera = () => {
         scrub: 5,
         start: 'top top',
         end: 'bottom bottom',
+        onUpdate: ()=> invalidate()
       },
     });
 
@@ -36,7 +37,11 @@ const FullCanvasCamera = () => {
       },
       0
     );
-  });
+
+    return () => {
+      tl.kill();
+    }
+  }, [camera, invalidate]);
 
   React.useLayoutEffect(() => {
     camera.rotation.order = 'YXZ';
