@@ -14,7 +14,7 @@ export default {
       colors: {
         blue_10: '#062949f1',
         yellow_10: '#c59c06',
-        white_10: '#fcfeff',
+        white_10: '#f2f5f7',
         black_10: '#0a1524',
       },
       maxWidth: {

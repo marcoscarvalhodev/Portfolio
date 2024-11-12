@@ -4,7 +4,7 @@ export enum SkillsTypes {
   soil_type = 'SOIL_TYPE',
 }
 
-interface initSkillsInt {
+export interface initSkillsInt {
   cactusState: boolean;
   spikeState: boolean;
   soilState: boolean;
