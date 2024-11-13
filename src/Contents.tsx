@@ -14,6 +14,12 @@ import { SiHtml5 } from 'react-icons/si';
 import { SiJest } from 'react-icons/si';
 import { SiVitest } from 'react-icons/si';
 
+import { SiLinkedin } from 'react-icons/si';
+import { SiGithub } from 'react-icons/si';
+import { GrMailOption } from "react-icons/gr";
+
+import { SiWhatsapp } from 'react-icons/si';
+
 export const ContentProjects = [
   {
     id: '01',
@@ -121,5 +127,11 @@ export const ContentSkills = {
     content_2: 'These are all my tech skills up to the present moment:',
     content_3:
       'You can click on the button below to return to the previous screen.',
+  },
+};
+
+export const ContentContact = {
+  info: {
+    links: [{icon: <SiLinkedin />, link: 'https://www.linkedin.com/in/marcoscarvalhodev/'}, {icon: <SiGithub />, link: 'https://github.com/marcoscarvalhodev'}, {icon: <GrMailOption />, link: 'mailto:marcoscarvalhodev99@gmail.com'}, {icon: <SiWhatsapp />, link: 'https://wa.me//5511962260368'}],
   },
 };

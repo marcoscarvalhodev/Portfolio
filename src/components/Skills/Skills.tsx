@@ -31,7 +31,7 @@ const Skills = () => {
 
   React.useEffect(() => {
     const ctx = gsap.context(() => {
-      const handleMouseMove = (event) => {
+      const handleMouseMove = (event:MouseEvent) => {
         gsap.to(dotRef.current, {
           x: event.clientX - 5,
           y: event.clientY - 5,
@@ -44,7 +44,7 @@ const Skills = () => {
       function activateDot() {
         document.addEventListener('mousemove', handleMouseMove);
         document.body.style.cursor = 'none';
-        console.log('enter');
+        
       }
 
       function disableDot() {
@@ -56,7 +56,7 @@ const Skills = () => {
           opacity: 0,
         });
         document.body.style.cursor = 'default';
-        console.log('leave');
+      
       }
 
       cactusRef.current?.addEventListener('mouseenter', activateDot);
@@ -110,7 +110,7 @@ const Skills = () => {
   React.useEffect(() => {
     const activeEl = cactusRef.current;
 
-    const handleMouseOver = (event) => {
+    const handleMouseOver = (event: MouseEvent) => {
       if (event.target instanceof SVGPathElement) {
         if (['cactus-back'].includes(event.target.id)) {
           dispatchCactus({ type: SkillsTypes.cactus_type, payload: true });
@@ -143,7 +143,7 @@ const Skills = () => {
   }, [allActive]);
 
   return (
-    <section className={`px-[7.2rem] relative -top-[160px]`}>
+    <div className={`px-[7.2rem] relative -top-[160px]`}>
       <h1
         ref={titleRef}
         className='text-[#0a1524] sm:text-f-30 md:text-f-20 lg:text-f-10 pb-[4rem]'
@@ -257,7 +257,7 @@ const Skills = () => {
           className='fixed top-[0] left-[0] w-[1.2rem] h-[1.2rem] bg-blue_10 rounded-[50%] pointer-events-none z-[1000] opacity-0'
         ></span>
       </div>
-    </section>
+    </div>
   );
 };
 

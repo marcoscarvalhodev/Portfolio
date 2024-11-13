@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import Projects from './components/ProjectsSection/Projects';
+import Contact from './components/Contact/Contact';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +23,7 @@ function App() {
     ctx.revert();
   });
 
-  const wrapper = React.useRef<HTMLDivElement | null>(null);
+  const wrapper = React.useRef<HTMLElement | null>(null);
 
   React.useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -39,7 +40,9 @@ function App() {
   }, []);
 
   return (
-    <div ref={wrapper} className='relative w-full z-50 '>
+    <main ref={wrapper} className='relative w-full z-50 '>
+      <FullCanvas />
+
       <NavBar />
       <section id='section1' className='top-sec h-[100vh] w-full relative'>
         <Hero />
@@ -49,14 +52,16 @@ function App() {
         <Projects />
       </section>
 
-      <FullCanvas />
+      <section id='section3' className='top-sec'>
+        <BaseballCanvas />
+      </section>
 
-      <div className='relative h-[200vh] w-screen'>
-        <section id='section3' className='top-sec'>
-          <BaseballCanvas />
-        </section>
-      </div>
-    </div>
+      <section id='section4' className='top-sec'>
+        <Contact />
+      </section>
+
+      <section className='h-[100vh] w-screen'></section>
+    </main>
   );
 }
 
