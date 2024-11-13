@@ -126,7 +126,7 @@ const Projects = () => {
   }, [videoRefs, backgroundRefs, numberBackgroundRefs]);
 
   return (
-    <section
+    <div
       className={`${styles.flexWrapper} w-screen z-50 relative px-[7.2rem] flex-col mt-[7.2rem]`}
     >
       <h1 className='text-[#0a1524] sm:text-f-30 md:text-f-20 lg:text-f-10 pb-[4rem]'>
@@ -138,7 +138,7 @@ const Projects = () => {
           return <ProjectsContainer {...item} key={index} />;
         })}
       </div>
-    </section>
+    </div>
   );
 };
 

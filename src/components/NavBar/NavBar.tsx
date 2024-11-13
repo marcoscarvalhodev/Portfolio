@@ -78,8 +78,13 @@ const NavBar = () => {
               Skills
             </a>
             <a
-              href=''
-              className='text-[1.8rem] text-[#091729] hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]'
+            
+              onClick={() => handleClick('section4')}
+              className={`${
+                activeSection === 'section4'
+                  ? 'bg-blue_10 text-[#edf1f7de]'
+                  : ''
+              } cursor-pointer text-[1.8rem] text-[#091729] hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] p-[2rem]`}
             >
               Contact
             </a>
