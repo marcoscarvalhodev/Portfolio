@@ -9,10 +9,9 @@ import { BaseballField } from '../BaseballAnimations/BaseballField';
 import { BaseballPlayers } from '../BaseballAnimations/BaseballPlayers';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import Projects from '../ProjectsSection/Projects';
 import { UseBaseballContext } from '../../context/UseContext';
 import ScreenSizes from '../../hooks/screenSizes';
-import Skills from '../Skills/Skills';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const BaseballCanvas = () => {
@@ -59,10 +58,8 @@ const BaseballCanvas = () => {
   return (
     <div
       ref={canvasBaseballRef}
-      className='canvas mt-96 relative h-[100vh] w-full z-50'
+      className='canvas mt-[1rem] relative h-[100vh] w-full z-50'
     >
-      
-      <Skills />
 
       {!smallScreen && (
         <span
