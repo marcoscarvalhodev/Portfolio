@@ -127,11 +127,9 @@ const Projects = () => {
 
   return (
     <div
-      className={`${styles.flexWrapper} w-screen z-50 relative px-[7.2rem] flex-col mt-[7.2rem]`}
+      className={`${styles.flexWrapper} w-screen px-[7.2rem] flex-col`}
     >
-      <h1 className='text-[#0a1524] sm:text-f-30 md:text-f-20 lg:text-f-10 pb-[4rem]'>
-        Works
-      </h1>
+      
 
       <div className='flex flex-col'>
         {ContentProjects.map((item, index) => {
