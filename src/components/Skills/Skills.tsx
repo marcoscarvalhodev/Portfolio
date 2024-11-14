@@ -14,7 +14,6 @@ const Skills = () => {
   const { metaphorTextFromRight, initialTextFromRight, allSkillsFromRight } =
     SkillsAnimations();
 
-  const titleRef = React.useRef<null | HTMLHeadingElement>(null);
   const cactusRef = React.useRef<HTMLDivElement | null>(null);
   const textRef = React.useRef<HTMLUListElement | null>(null);
   const allSkillsRef = React.useRef<HTMLLIElement | null>(null);
@@ -31,7 +30,7 @@ const Skills = () => {
 
   React.useEffect(() => {
     const ctx = gsap.context(() => {
-      const handleMouseMove = (event:MouseEvent) => {
+      const handleMouseMove = (event: MouseEvent) => {
         gsap.to(dotRef.current, {
           x: event.clientX - 5,
           y: event.clientY - 5,
@@ -44,7 +43,6 @@ const Skills = () => {
       function activateDot() {
         document.addEventListener('mousemove', handleMouseMove);
         document.body.style.cursor = 'none';
-        
       }
 
       function disableDot() {
@@ -56,7 +54,6 @@ const Skills = () => {
           opacity: 0,
         });
         document.body.style.cursor = 'default';
-      
       }
 
       cactusRef.current?.addEventListener('mouseenter', activateDot);
@@ -73,7 +70,6 @@ const Skills = () => {
   }, []);
 
   useGSAP(() => {
-    const textArr = textRef.current!.children;
     const textFromRight = [
       {
         activeText: '#cactus-text',
@@ -136,25 +132,15 @@ const Skills = () => {
       activeEl?.addEventListener('mouseover', handleMouseOver);
     }
 
-    // Cleanup to remove the event listener when allActive changes or component unmounts
     return () => {
       activeEl?.removeEventListener('mouseover', handleMouseOver);
     };
   }, [allActive]);
 
   return (
-    <div className={`px-[7.2rem] relative -top-[160px]`}>
-      <h1
-        ref={titleRef}
-        className='text-[#0a1524] sm:text-f-30 md:text-f-20 lg:text-f-10 pb-[4rem]'
-      >
-        Skills
-      </h1>
-
-      <div
-        className={`${styles.backgroundAll} h-max z-[999] bg-[transparent] absolute left-[0] w-screen  flex justify-start items-start`}
-      >
-        <div className=' flex-1 w-[50%] h-[100%]  py-[7.2rem]' ref={cactusRef}>
+    <div className={` relative w-screen z-[998]`}>
+      <div className={`w-screen flex justify-start items-start`}>
+        <div className='flex-1 w-[50%] h-[100%]  py-[7.2rem]' ref={cactusRef}>
           <span className='absolute left-0 top-0 bottom-0 right-[50%] z-[-1] bg-white_10'></span>
           <CactusSVG
             className={`w-[100%] h-max ${
@@ -179,7 +165,7 @@ const Skills = () => {
                 <h1 className='text-white_10 text-f-25'>{title}</h1>
                 <p className='text-white_10 text-f-40'>{content}</p>
 
-                <ul  className='flex flex-wrap gap-[3rem]'>
+                <ul className='flex flex-wrap gap-[3rem]'>
                   {skills.map((item, index) => {
                     return React.cloneElement(item, {
                       key: index,
@@ -187,7 +173,6 @@ const Skills = () => {
                     });
                   })}
                 </ul>
-
               </li>
             );
           })}
