@@ -2,18 +2,14 @@
   width: 20px;
 }
 
-/* Style the scrollbar track (the background of the scrollbar) */
 .messageArea::-webkit-scrollbar-track {
   background-color: transparent;
   border-radius: 10px;
-
-  /* rounded corners */
 }
 
-/* Style the draggable part (thumb) of the scrollbar */
 .messageArea::-webkit-scrollbar-thumb {
-  background-color: theme('colors.blue_10'); /* dark gray thumb */
+  background-color: theme('colors.blue_10');
   border-radius: 10px; /* rounded corners */
-  border: 5px solid #f1f1f1; /* optional border */
+  border: 5px solid theme("colors.white_10");
   cursor: default;
 }
