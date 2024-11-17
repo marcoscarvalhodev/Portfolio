@@ -2,11 +2,10 @@ import React from 'react';
 import { ContentContact } from '../../Contents';
 import ContactForm from './ContactForm';
 
+
 const Contact = () => {
   return (
     <div className='w-screen z-50 relative  flex-col'>
-      
-
       <ul className='w-full flex'>
         <li className='bg-blue_10 flex-1 p-[7.2rem] flex flex-col gap-[4rem]'>
           <p className='text-white_10 text-f-30'>
@@ -15,9 +14,7 @@ const Contact = () => {
             needs.
           </p>
 
-          <p className='text-white_10 text-f-30'>
-            My professional profiles:
-          </p>
+          <p className='text-white_10 text-f-30'>My professional profiles:</p>
 
           <ul className='flex gap-[3rem]'>
             {ContentContact.info.links.map(({ icon, link }, index) => {
