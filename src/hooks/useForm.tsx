@@ -4,11 +4,12 @@ interface useFormProps {
   type: 'name' | 'email' | 'message' | '';
 }
 
+
 const types = {
   name: {
-    regex:
-      /^[A-Za-z]+(?:'[A-Za-z]+)*(?:\s[A-Za-z]+(?:'[A-Za-z]+)*)?$/,
-    message: 'Please write a valid name, without numbers or other special characters.',
+    regex: /^[A-Za-z]+(?:'[A-Za-z]+)*(?:\s[A-Za-z]+(?:'[A-Za-z]+)*)?$/,
+    message:
+      'Please write a valid name, without numbers or other special characters.',
   },
   email: {
     regex:
@@ -25,7 +26,9 @@ const useForm = ({ type }: useFormProps) => {
   const [value, setValue] = React.useState('');
   const [error, setError] = React.useState<string | null>(null);
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = ({ target }) => {
+  const onChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = ({ target }) => {
     if (error) {
       validate(target.value);
     }
@@ -53,7 +56,7 @@ const useForm = ({ type }: useFormProps) => {
     error,
     onChange,
     validate: () => validate(value),
-    onBlur: () => validate(value)
+    onBlur: () => validate(value),
   };
 };
 
