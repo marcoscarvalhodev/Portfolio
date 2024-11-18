@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), svgr(), glsl()],
   define: {
     "process.env": process.env,
-    VITE_API_URL: process.env.VITE_API_URL,
+    VITE_API_URL: JSON.stringify(process.env.VITE_API_URL),
   },
   resolve: {
     alias: {
