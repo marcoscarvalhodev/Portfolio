@@ -7,9 +7,8 @@ import glsl from 'vite-plugin-glsl';
 export default defineConfig({
   plugins: [react(), svgr(), glsl()],
   define: {
-    'process.env.VITE_APP_API_URL': JSON.stringify(
-      process.env.VITE_APP_API_URL
-    ),
+    "process.env": process.env,
+    VITE_API_URL: process.env.VITE_API_URL,
   },
   resolve: {
     alias: {
