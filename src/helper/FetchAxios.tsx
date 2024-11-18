@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_VERCEL_BASE_URL;
+const baseURL = import.meta.env.VITE_APP_API_URL;
 
 interface FetchAxiosProps {
   name: string;

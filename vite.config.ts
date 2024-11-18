@@ -6,6 +6,11 @@ import glsl from 'vite-plugin-glsl';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgr(), glsl()],
+  define: {
+    'process.env.VITE_APP_API_URL': JSON.stringify(
+      process.env.VITE_APP_API_URL
+    ),
+  },
   resolve: {
     alias: {
       '@': '/src',
