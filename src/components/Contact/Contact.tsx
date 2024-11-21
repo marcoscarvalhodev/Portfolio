@@ -6,8 +6,8 @@ import ContactForm from './ContactForm';
 const Contact = () => {
   return (
     <div className='w-screen z-50 relative  flex-col'>
-      <ul className='w-full flex'>
-        <li className='bg-blue_10 flex-1 p-[7.2rem] flex flex-col gap-[4rem]'>
+      <ul className='w-full flex sm:flex-col-reverse lg:flex-row'>
+        <li className='blue-background bg-blue_10 flex-1 p-[7.2rem] flex flex-col gap-[4rem]'>
           <p className='text-white_10 text-f-30'>
             Feel free to reach out if you'd like to discuss potential
             partnerships, or how my services could support your team or project

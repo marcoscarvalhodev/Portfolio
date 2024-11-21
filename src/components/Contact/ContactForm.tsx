@@ -5,7 +5,6 @@ import useForm from '../../hooks/useForm';
 import { FetchAxios } from '../../helper/FetchAxios';
 
 import { GoCheckCircle } from 'react-icons/go';
-import { IoCloseCircleOutline } from 'react-icons/io5';
 
 const ContactForm = () => {
   const email = useForm({ type: 'email' });

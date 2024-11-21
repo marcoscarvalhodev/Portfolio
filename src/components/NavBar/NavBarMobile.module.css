@@ -1,0 +1,43 @@
+.menuButton {
+  @apply w-[3.5rem] h-[0.5rem] hover:bg-yellow_10 bg-blue_10 block relative mt-[2rem] transition-all duration-[1s];
+}
+
+.menuButton:before,
+.menuButton:after {
+  @apply absolute content-[""] hover:bg-yellow_10 block w-full h-[0.5rem] bg-blue_10 transition-all duration-[1s] right-0;
+}
+
+.menuButtonOn {
+  @apply bg-yellow_10;
+}
+
+.menuButton:after {
+  @apply -top-[20px];
+}
+
+.menuButton:before {
+  @apply -top-[10px];
+}
+
+.menuButtonOn:before {
+  @apply w-[50%];
+}
+
+.menuButtonOn:after {
+  @apply w-[80%];
+}
+
+.menuButtonOn:after,
+.menuButtonOn:before {
+  @apply bg-yellow_10;
+}
+
+.menuButtonWhite {
+  @apply bg-white_10 transition-all duration-[0.7s];
+
+  
+}
+
+.menuButtonWhite:after, .menuButtonWhite:before {
+  @apply bg-white_10 transition-all duration-[0.7s];
+}

@@ -1,7 +1,6 @@
 import React, { Children, useRef } from 'react';
 import { ContentSkills } from '../../Contents';
 import CactusSVG from '../../assets/skills/cactus.svg?react';
-import styles from './Skills.module.css';
 import { initSkills, reducerSkills } from '../../helper/SkillsReducer';
 import { SkillsTypes } from '../../helper/SkillsReducer';
 
@@ -10,9 +9,12 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(ScrollTrigger);
 import SkillsAnimations from './SkillsAnimations';
+import ScreenSizes from '../../hooks/screenSizes';
 const Skills = () => {
   const { metaphorTextFromRight, initialTextFromRight, allSkillsFromRight } =
     SkillsAnimations();
+
+  const { largeScreen } = ScreenSizes();
 
   const cactusRef = React.useRef<HTMLDivElement | null>(null);
   const textRef = React.useRef<HTMLUListElement | null>(null);
@@ -104,6 +106,12 @@ const Skills = () => {
   });
 
   React.useEffect(() => {
+    if (largeScreen) {
+      setAllActive(true);
+    }
+  }, [largeScreen]);
+
+  React.useEffect(() => {
     const activeEl = cactusRef.current;
 
     const handleMouseOver = (event: MouseEvent) => {
@@ -140,7 +148,10 @@ const Skills = () => {
   return (
     <div className={` relative w-screen z-[998]`}>
       <div className={`w-screen flex justify-start items-start`}>
-        <div className='flex-1 w-[50%] h-[100%]  py-[7.2rem]' ref={cactusRef}>
+        <div
+          className='sm:hidden lg:flex flex-1 w-[50%] h-[100%]  py-[7.2rem]'
+          ref={cactusRef}
+        >
           <span className='absolute left-0 top-0 bottom-0 right-[50%] z-[-1] bg-white_10'></span>
           <CactusSVG
             className={`w-[100%] h-max ${
@@ -153,7 +164,7 @@ const Skills = () => {
 
         <ul
           ref={textRef}
-          className=' w-[50%] absolute right-0 bottom-0 top-0 z-[-1] py-[7.2rem] bg-blue_10'
+          className='blue-background lg:w-[50%] sm:w-full absolute right-0 bottom-0 top-0 z-[-1] py-sp-20 bg-blue_10'
         >
           {ContentSkills.contents.map(({ title, content, id, skills }) => {
             return (
@@ -180,7 +191,7 @@ const Skills = () => {
 
         <ul
           id='parent-main-text'
-          className='w-[50%] absolute right-0 bottom-0 top-0  z-[0] py-[7.2rem] '
+          className='sm:hidden lg:block w-[50%] absolute right-0 bottom-0 top-0  z-[0] py-[7.2rem] '
         >
           <li
             id={ContentSkills.mainText.id}
@@ -204,10 +215,10 @@ const Skills = () => {
           </li>
         </ul>
 
-        <ul id='parent-all-skills' className=' flex-1 py-[7.2rem]'>
+        <ul id='parent-all-skills' className=' flex-1 lg:py-sp-20 sm:py-sp-50'>
           <li
             ref={allSkillsRef}
-            className='flex flex-col gap-[3rem] px-[7.2rem] translate-x-[calc(100%+10rem)]'
+            className='flex flex-col gap-[3rem] lg:px-sp-20 sm:px-sp-50 translate-x-[calc(100%+10rem)]'
           >
             <h1 className='text-white_10 text-f-25'>
               {ContentSkills.allSkills.title}
@@ -230,7 +241,7 @@ const Skills = () => {
 
             <button
               onClick={() => setAllActive(false)}
-              className='bg-yellow_10 text-black_10 text-f-40 border-[2px] border-soild border-yellow_10 w-max px-[2rem] py-[0.5rem] rounded-[3rem] transition-all duration-[0.7s] hover:bg-white_10 hover:text-blue_10 hover:border-white_10'
+              className='sm:hidden lg:block bg-yellow_10 text-black_10 text-f-40 border-[2px] border-soild border-yellow_10 w-max px-[2rem] py-[0.5rem] rounded-[3rem] transition-all duration-[0.7s] hover:bg-white_10 hover:text-blue_10 hover:border-white_10'
             >
               {ContentSkills.allSkills.button}
             </button>

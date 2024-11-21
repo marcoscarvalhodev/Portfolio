@@ -20,6 +20,7 @@ const ProjectsContainer = ({
   const refVideo = React.useRef<HTMLVideoElement | null>(null);
   const refBackground = React.useRef<HTMLSpanElement | null>(null);
   const refNumberBackground = React.useRef<HTMLSpanElement | null>(null);
+  const refMobileBackground = React.useRef<HTMLDivElement | null>(null);
 
   const { addProjectsRef } = UseVideoProjectsContext();
 
@@ -27,25 +28,28 @@ const ProjectsContainer = ({
     if (
       refVideo.current &&
       refBackground.current &&
-      refNumberBackground.current
+      refNumberBackground.current &&
+      refMobileBackground
     ) {
       addProjectsRef({
         refVideo: refVideo.current,
         refBackground: refBackground.current,
         refNumberBackground: refNumberBackground.current,
+        refMobileBackground: refMobileBackground.current
       });
     }
   }, [addProjectsRef]);
 
   return (
     <div
-      className={`${styles.flexAlternate} mb-[7.2rem] w-[100%] flex relative`}
+      ref={refMobileBackground}
+      className={`${styles.flexAlternate} flex mb-[7.2rem] w-[100%] sm:flex-col-reverse md:flex relative `}
     >
       <div className={`${styles.videoAlternate} flex-[1] relative h-[100%]`}>
         <video ref={refVideo} className='' muted loop src={video} />
 
         <h2
-          className={`${styles.numberAlternate} absolute z-50 bottom-0 text-f-20 py-[0.5rem] px-[1.5rem] `}
+          className={`${styles.numberAlternate} text-black_10 absolute z-50 bottom-0 text-f-20 py-[0.5rem] px-[1.5rem] `}
         >
           <span
             ref={refNumberBackground}
@@ -57,7 +61,7 @@ const ProjectsContainer = ({
         <a
           href={link}
           target='_blank'
-          className=' scale-90 hover:scale-100 text-[#0a1524] hover:text-[#fcfeff] hover:bg-blue_10 transition-all duration-[0.6s] text-f-40 absolute -translate-x-[50%] -translate-y-[50%] left-[50%] top-[50%] bg-[#c59c06] rounded-[50%] py-[4rem] px-[3.2rem] '
+          className=' scale-90 hover:scale-100 text-black_10 hover:text-[#fcfeff] hover:bg-blue_10 transition-all duration-[0.6s] text-f-40 absolute -translate-x-[50%] -translate-y-[50%] left-[50%] top-[50%] bg-[#c59c06] rounded-[50%] py-[4rem] px-[3.2rem] '
         >
           View
         </a>
@@ -69,7 +73,7 @@ const ProjectsContainer = ({
             ref={refBackground}
             className={`${styles.textBackground} textBackground absolute w-[calc(100%+12.2rem)] top-0 left-0 bottom-[0px] z-[-1] `}
           ></span>
-          <div className='p-[2rem]'>
+          <div className='sm:pb-sp-70 lg:p-sp-60'>
             <h1 className='text-f-20 md:text-f-50 lg:text-f-20'>{title}</h1>
             <p className='text-f-30 md:text-f-50 lg:text-f-40'>{text}</p>
           </div>
