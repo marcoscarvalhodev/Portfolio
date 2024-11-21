@@ -3,13 +3,16 @@ import App from './App.tsx';
 import './index.css';
 import { BaseballContextProvider } from './context/BaseballContext.tsx';
 import { VideoProjectsProvider } from './context/VideoProjectsContext.tsx';
+import { MenuMobileProvider } from './context/MenuMobileContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <>
-    <VideoProjectsProvider>
-      <BaseballContextProvider>
-        <App />
-      </BaseballContextProvider>
-    </VideoProjectsProvider>
+    <MenuMobileProvider>
+      <VideoProjectsProvider>
+        <BaseballContextProvider>
+          <App />
+        </BaseballContextProvider>
+      </VideoProjectsProvider>
+    </MenuMobileProvider>
   </>
 );

@@ -1,45 +1,43 @@
 .flexAlternate {
-  gap: 5rem;
+  @apply gap-[5rem];
 }
 
 .flexAlternate:nth-child(odd) {
-  flex-direction: row;
+  @apply md:flex-row;
 
   .flexText {
     .textContent {
       .textBackground {
-        transform: translateX(calc(100% + 8rem));
-        background-color: theme('colors.blue_10');
+        @apply translate-x-[calc(100%+8rem)] bg-blue_10;
       }
     }
   }
 
   .numberAlternate {
-    right: 0;
+    @apply right-0;
 
     .numberBackground {
-      left: 100%;
+      @apply left-[100%];
     }
   }
 }
 
 .flexAlternate:nth-child(even) {
-  flex-direction: row-reverse;
+  @apply md:flex-row-reverse;
 
   .flexText {
     .textContent {
       .textBackground {
-        transform: translateX(calc(-100% + -8rem));
-        background-color: theme('colors.blue_10');
+        @apply translate-x-[calc(-100%+-8rem)] bg-blue_10;
       }
     }
   }
 
   .numberAlternate {
-    left: 0;
+    @apply left-0;
 
     .numberBackground {
-      right: 100%;
+      @apply right-[100%];
     }
   }
 }

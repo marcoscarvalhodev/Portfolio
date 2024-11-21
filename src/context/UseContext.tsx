@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { CreateBaseballContext } from './BaseballContext';
 import { CreateVideoProjectsContext } from './VideoProjectsContext';
+import { CreateMenuMobileContext } from './MenuMobileContext';
 
 export const UseBaseballContext = () => {
   const useBaseballContext = useContext(CreateBaseballContext);
@@ -18,4 +19,13 @@ export const UseVideoProjectsContext = () => {
   }
 
   return useVideoProjectsContext;
+};
+
+export const UseMenuMobileContext = () => {
+  const useMenuMobileContext = useContext(CreateMenuMobileContext);
+  if (!useMenuMobileContext) {
+    throw new Error('there is no menuMobile context');
+  }
+
+  return useMenuMobileContext;
 };

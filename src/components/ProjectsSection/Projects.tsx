@@ -1,16 +1,12 @@
 import React from 'react';
-import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
-import {
-  UseBaseballContext,
-  UseVideoProjectsContext,
-} from '../../context/UseContext';
+import { UseVideoProjectsContext } from '../../context/UseContext';
 import ProjectsContainer from './ProjectsContainer';
 import { ContentProjects } from '../../Contents';
 import styles from './Projects.module.css';
-import { cubeTexture, timerLocal } from 'three/webgpu';
+import ScreenSizes from '../../hooks/screenSizes';
 
 interface customTriggerProps {
   video: HTMLVideoElement | null;
@@ -21,22 +17,13 @@ interface customTriggerProps {
 }
 
 const Projects = () => {
-  const { closeCanvas } = UseBaseballContext();
-  const { videoRefs, backgroundRefs, numberBackgroundRefs } =
-    UseVideoProjectsContext();
-
-  /*useGSAP(() => {
-    if (closeCanvas) {
-      gsap.to('.projects', {
-        left: '50%',
-        ease: 'elastic',
-        duration: 1,
-        opacity: 1,
-        display: 'flex',
-        background: 'transparent',
-      });
-    }
-  }, [closeCanvas]);*/
+  const {
+    videoRefs,
+    backgroundRefs,
+    numberBackgroundRefs,
+    mobileBackgroundRefs,
+  } = UseVideoProjectsContext();
+  const { largeScreen } = ScreenSizes();
 
   React.useEffect(() => {
     const ctx = gsap.context(() => {
@@ -67,7 +54,9 @@ const Projects = () => {
           x: indexCheck ? -65 : -72,
           duration: 1,
           scrollTrigger: {
-            trigger: backgroundRefs.current[index],
+            trigger: largeScreen
+              ? mobileBackgroundRefs.current[index]
+              : backgroundRefs.current[index],
             start: 'top center',
             end: 'bottom center',
             toggleActions: 'play reverse play reverse',
@@ -76,14 +65,14 @@ const Projects = () => {
             onEnter: () => {
               video?.play();
               gsap.to(siblings, {
-                color: '#fcfeff',
+                color: '#f2f5f7',
                 duration: 2,
               });
             },
             onEnterBack: () => {
               video?.play();
               gsap.to(siblings, {
-                color: '#fcfeff',
+                color: '#f2f5f7',
                 duration: 2,
               });
             },
@@ -123,14 +112,18 @@ const Projects = () => {
     });
 
     return () => ctx.revert();
-  }, [videoRefs, backgroundRefs, numberBackgroundRefs]);
+  }, [
+    videoRefs,
+    backgroundRefs,
+    numberBackgroundRefs,
+    largeScreen,
+    mobileBackgroundRefs,
+  ]);
 
   return (
     <div
-      className={`${styles.flexWrapper} w-screen px-[7.2rem] flex-col`}
+      className={`${styles.flexWrapper} w-screen lg:px-sp-20 sm:px-sp-50 flex-col`}
     >
-      
-
       <div className='flex flex-col'>
         {ContentProjects.map((item, index) => {
           return <ProjectsContainer {...item} key={index} />;

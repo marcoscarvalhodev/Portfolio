@@ -13,12 +13,14 @@ import { SiThreedotjs } from 'react-icons/si';
 import { SiHtml5 } from 'react-icons/si';
 import { SiJest } from 'react-icons/si';
 import { SiVitest } from 'react-icons/si';
+import { SiDotnet } from 'react-icons/si';
 
 import { SiLinkedin } from 'react-icons/si';
 import { SiGithub } from 'react-icons/si';
-import { GrMailOption } from "react-icons/gr";
+import { GrMailOption } from 'react-icons/gr';
 
 import { SiWhatsapp } from 'react-icons/si';
+import { SectionID } from './hooks/scrollSpy';
 
 export const ContentProjects = [
   {
@@ -81,6 +83,7 @@ export const ContentSkills = {
       skills: [
         <FaReact />,
         <RiNextjsFill />,
+        <SiDotnet />,
         <SiTailwindcss />,
         <SiStyledcomponents />,
         <SiThreedotjs />,
@@ -112,6 +115,7 @@ export const ContentSkills = {
       <SiTypescript />,
       <SiJavascript />,
       <SiCsharp />,
+      <SiDotnet />,
       <FaReact />,
       <RiNextjsFill />,
       <SiCss3 />,
@@ -132,6 +136,33 @@ export const ContentSkills = {
 
 export const ContentContact = {
   info: {
-    links: [{icon: <SiLinkedin />, link: 'https://www.linkedin.com/in/marcoscarvalhodev/'}, {icon: <SiGithub />, link: 'https://github.com/marcoscarvalhodev'}, {icon: <GrMailOption />, link: 'mailto:marcoscarvalhodev99@gmail.com'}, {icon: <SiWhatsapp />, link: 'https://wa.me//5511962260368'}],
+    links: [
+      {
+        icon: <SiLinkedin />,
+        link: 'https://www.linkedin.com/in/marcoscarvalhodev/',
+      },
+      { icon: <SiGithub />, link: 'https://github.com/marcoscarvalhodev' },
+      { icon: <GrMailOption />, link: 'mailto:marcoscarvalhodev99@gmail.com' },
+      { icon: <SiWhatsapp />, link: 'https://wa.me//5511962260368' },
+    ],
   },
+};
+
+interface ContentNavProps {
+  nav_1: {
+    navItem: string;
+    navSection: SectionID;
+    id: number;
+  }[];
+  nav_2: string;
+}
+
+export const ContentNav: ContentNavProps = {
+  nav_1: [
+    { navItem: 'Home', navSection: 'section1', id: 1 },
+    { navItem: 'Works', navSection: 'section2', id: 2 },
+    { navItem: 'Skills', navSection: 'section3', id: 3 },
+    { navItem: 'Contact', navSection: 'section4', id: 4 },
+  ],
+  nav_2: 'Want a more dimensional project?',
 };
