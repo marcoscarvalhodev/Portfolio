@@ -13,6 +13,7 @@ body,
   padding: 0;
   font-size: 10px;
   box-sizing: border-box;
+  font-family: "Chivo";
   
 }
 
@@ -30,38 +31,6 @@ body {
   -webkit-backdrop-filter: blur(10px);
 }
 
-/*svg {
-  #spike,
-  #cactus-1,
-  #cactus-2,
-  #soil-1,
-  #soil-2,
-  #background {
-    fill: white;
-  }
-
-  #spike:hover {
-    fill: #837b28;
-  }
-
-  #cactus-1:hover {
-    fill: #2f8137;
-  }
-
-  #cactus-1:hover ~ #cactus-2 {
-    fill: #18661B;
-  }
-
-  #cactus-2:hover {
-    fill: #18661B;
-  }
-
-  #cactus-2:hover ~ #cactus-1 {
-    fill: #2f8137;
-    
-  }
-}
-*/
 #cactus-1,
 #cactus-2,
 #spike,
@@ -120,4 +89,16 @@ body {
     fill: #90861c;
     transition: all 1s;
   }
+}
+
+.title {
+ @apply sm:text-f-20 lg:text-f-10;
+}
+
+.subtitle {
+  @apply xsm:text-f-30 sm:text-f-25 lg:text-f-20;
+}
+
+.normalText {
+  @apply sm:text-f-40;
 }

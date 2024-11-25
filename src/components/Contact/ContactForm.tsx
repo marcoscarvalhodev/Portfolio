@@ -40,13 +40,13 @@ const ContactForm = () => {
           emailSent
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
-        } flex items-center gap-[1.5rem] justify-center h-[100%] flex-col absolute`}
+        } flex items-center gap-sp-70 justify-center h-[100%] flex-col absolute`}
       >
-        <div className='flex items-center gap-[1.5rem] justify-center'>
+        <div className='flex items-center gap-sp-70 justify-center'>
           <p className='text-[#1fa51f] text-f-30'>Email sent successfully</p>
           <GoCheckCircle className='w-[4rem] h-[4rem] fill-[#1fa51f]' />
         </div>
-        <p className='text-blue_10 text-f-30'>
+        <p className='text-blue_10 normalText'>
           You will be contacted as soon as possible.
         </p>
       </div>
@@ -69,9 +69,9 @@ const ContactForm = () => {
               onChange={message.onChange}
               value={message.value}
               placeholder='Message'
-              className={`${styles.messageArea} text-blue_10 text-f-40 w-[100%] outline-none border-solid border-[2px] border-blue_10 rounded-[1rem] p-[1rem] overflow-y-auto h-[20rem] resize-none placeholder-blue_10 bg-white_10`}
+              className={`${styles.messageArea} text-blue_10 normalText w-[100%] outline-none border-solid border-[2px] border-blue_10 rounded-[1rem] p-[1rem] overflow-y-auto h-[20rem] resize-none placeholder-blue_10 bg-white_10`}
             />
-            <p className='text-f-40 text-[#e02727] mt-[1rem]'>
+            <p className='normalText text-red_10 mt-[1rem]'>
               {message.error}
             </p>
           </li>
@@ -80,12 +80,12 @@ const ContactForm = () => {
           <button
             disabled
             type='submit'
-            className=' opacity-[0.8] text-f-40 px-[2rem] py-[0.5rem] rounded-[4rem] bg-blue_10 text-white_10 transition-all duration-[0.7s] mt-[3rem]'
+            className=' opacity-[0.8] normalText px-[2rem] py-[0.5rem] rounded-[4rem] bg-blue_10 text-white_10 transition-all duration-[0.7s] mt-[3rem]'
           >
             Sending...
           </button>
         ) : (
-          <div className='flex items-center mt-[3rem] gap-[2rem]'>
+          <div className='flex items-center mt-sp-50 gap-sp-60'>
             <button
               type='submit'
               className='text-f-40 px-[2rem] py-[0.5rem] bg-yellow_10 rounded-[4rem] text-blue_10 hover:bg-blue_10 hover:text-white_10 transition-all duration-[0.7s]'
@@ -94,7 +94,7 @@ const ContactForm = () => {
             </button>
 
             {error ? (
-              <p className='text-f-40 text-[#e02727]'>
+              <p className='normalText text-red_10'>
                 Email couldn't be sent, please try again.
               </p>
             ) : (

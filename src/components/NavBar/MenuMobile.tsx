@@ -6,7 +6,6 @@ import ScrollSpy from '../../hooks/scrollSpy';
 import { UseMenuMobileContext } from '../../context/UseContext';
 
 const MenuMobile = () => {
-
   const { menuButtonOn, setMenuButtonOn } = UseMenuMobileContext();
 
   const tl = gsap.timeline();
@@ -43,29 +42,30 @@ const MenuMobile = () => {
 
   return (
     <>
-      <div
+      <ul
         id='mobile-menu'
-        className='mobile-menu bg-blue_10 flex flex-col justify-center h-[100vh] absolute z-[999] top-0 right-0 px-[10rem] translate-x-[100%] overflow-visible'
+        className='mobile-menu bg-blue_10 flex flex-col justify-center h-[100dvh] absolute z-[999] top-0 right-0 xsm:px-sp-50 sm:px-sp-30 translate-x-[100%] overflow-visible items-center'
       >
         {ContentNav.nav_1.map(({ navItem, navSection, id }) => {
           return (
-            <a
-              key={id}
-              onClick={() => {
-                setMenuButtonOn(false);
-                handleClick(navSection);
-              }}
-              className={`${
-                activeSection === navSection
-                  ? 'text-yellow_10'
-                  : 'text-white_10'
-              } cursor-pointer text-white_10 text-f-10 hover:text-yellow_10 transition-all duration-[0.7s]`}
-            >
-              {navItem}
-            </a>
+            <li key={id}>
+              <a
+                onClick={() => {
+                  setMenuButtonOn(false);
+                  handleClick(navSection);
+                }}
+                className={`${
+                  activeSection === navSection
+                    ? 'text-yellow_10'
+                    : 'text-white_10'
+                } cursor-pointer text-white_10 xsm:text-f-20 sm:text-f-10 hover:text-yellow_10 transition-all duration-[0.7s]`}
+              >
+                {navItem}
+              </a>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </>
   );
 };

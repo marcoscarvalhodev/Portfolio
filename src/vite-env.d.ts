@@ -8,3 +8,5 @@ declare module '@types/three' {
     geometry: string;
   }
 }
+
+

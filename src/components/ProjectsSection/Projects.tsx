@@ -8,13 +8,7 @@ import { ContentProjects } from '../../Contents';
 import styles from './Projects.module.css';
 import ScreenSizes from '../../hooks/screenSizes';
 
-interface customTriggerProps {
-  video: HTMLVideoElement | null;
-  index: number;
-  indexCheck: boolean;
-  siblings: Element[];
-  parentNumber: HTMLElement | null;
-}
+import { TailwindColors } from '../../helper/TailwindTheme';
 
 const Projects = () => {
   const {
@@ -25,11 +19,12 @@ const Projects = () => {
   } = UseVideoProjectsContext();
   const { largeScreen } = ScreenSizes();
 
+  const { blue_10, white_10, black_10 } = TailwindColors;
+
   React.useEffect(() => {
     const ctx = gsap.context(() => {
       videoRefs.current.forEach((video, index) => {
         const indexCheck = index % 2 === 0;
-
         const parentNumber = numberBackgroundRefs.current[index]!.parentElement;
 
         const siblings = Array.from(
@@ -40,14 +35,22 @@ const Projects = () => {
           right: '0%',
           left: '0%',
           duration: 1,
+          background: blue_10,
           onStart: () => {
             gsap.to(parentNumber, {
-              color: '#fcfeff',
+              color: white_10,
               duration: 1,
             });
           },
           paused: true,
         });
+
+        const secondAnimationBg = () => {
+          gsap.to(numberBackgroundRefs.current[index], {
+            background: 'transparent',
+            duration: 0,
+          });
+        };
 
         gsap.to(backgroundRefs.current[index], {
           xPercent: indexCheck ? 0 : 0,
@@ -60,12 +63,11 @@ const Projects = () => {
             start: 'top center',
             end: 'bottom center',
             toggleActions: 'play reverse play reverse',
-            markers: true,
 
             onEnter: () => {
               video?.play();
               gsap.to(siblings, {
-                color: '#f2f5f7',
+                color: white_10,
                 duration: 2,
               });
             },
@@ -78,27 +80,30 @@ const Projects = () => {
             },
             onLeave: () => {
               secondAnimation.pause(0);
+              secondAnimationBg();
               video?.pause();
               gsap.to(siblings, {
-                color: '#0a1524',
+                color: black_10,
                 duration: 2,
               });
 
               gsap.to(parentNumber, {
-                color: '#0a1524',
+                color: black_10,
                 duration: 2,
               });
             },
             onLeaveBack: () => {
+              
               secondAnimation.pause(0);
+              secondAnimationBg();
               video?.pause();
               gsap.to(siblings, {
-                color: '#0a1524',
+                color: black_10,
                 duration: 2,
               });
 
               gsap.to(parentNumber, {
-                color: '#0a1524',
+                color: black_10,
                 duration: 2,
               });
             },
@@ -118,6 +123,9 @@ const Projects = () => {
     numberBackgroundRefs,
     largeScreen,
     mobileBackgroundRefs,
+    blue_10,
+    black_10,
+    white_10
   ]);
 
   return (

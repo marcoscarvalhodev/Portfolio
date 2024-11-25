@@ -10,6 +10,7 @@ export default {
         'f-30': '3.2rem',
         'f-40': '2.4rem',
         'f-50': '1.8rem',
+        'f-60': '1.4rem',
       },
       spacing: {
         'sp-10': '9.6rem',
@@ -19,12 +20,14 @@ export default {
         'sp-50': '3.2rem',
         'sp-60': '2.4rem',
         'sp-70': '1.8rem',
+        'sp-80': '1.2rem',
       },
       colors: {
         blue_10: '#062949f1',
         yellow_10: '#c59c06da',
         white_10: '#f2f5f7',
         black_10: '#0a1524',
+        red_10: '#e02727'
       },
       maxWidth: {
         'max-container-10': '144rem',
@@ -35,6 +38,7 @@ export default {
       md: '860px',
       lg: '1024px',
       xl: '1280px',
+      xsm: { min: '320px', max: '520px' },
     },
   },
   plugins: [],

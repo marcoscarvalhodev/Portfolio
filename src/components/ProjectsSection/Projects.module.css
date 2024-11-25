@@ -1,5 +1,5 @@
 .flexAlternate {
-  @apply gap-[5rem];
+  @apply md:gap-sp-30 sm:gap-sp-50;
 }
 
 .flexAlternate:nth-child(odd) {

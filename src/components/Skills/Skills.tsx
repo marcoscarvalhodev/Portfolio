@@ -149,7 +149,7 @@ const Skills = () => {
     <div className={` relative w-screen z-[998]`}>
       <div className={`w-screen flex justify-start items-start`}>
         <div
-          className='sm:hidden lg:flex flex-1 w-[50%] h-[100%]  py-[7.2rem]'
+          className='sm:hidden lg:flex flex-1 w-[50%] h-[100%] py-sp-20'
           ref={cactusRef}
         >
           <span className='absolute left-0 top-0 bottom-0 right-[50%] z-[-1] bg-white_10'></span>
@@ -171,16 +171,16 @@ const Skills = () => {
               <li
                 id={id}
                 key={id}
-                className='hidden flex-col gap-[3rem] px-[7.2rem] absolute translate-x-[100%]'
+                className='hidden flex-col gap-sp-50 px-sp-20 absolute translate-x-[100%]'
               >
-                <h1 className='text-white_10 text-f-25'>{title}</h1>
+                <h1 className='text-white_10 subtitle'>{title}</h1>
                 <p className='text-white_10 text-f-40'>{content}</p>
 
-                <ul className='flex flex-wrap gap-[3rem]'>
+                <ul className='flex flex-wrap gap-sp-50'>
                   {skills.map((item, index) => {
                     return React.cloneElement(item, {
                       key: index,
-                      className: `fill-white w-[5rem] h-[5rem]`,
+                      className: `fill-white w-sp-40 h-sp-40`,
                     });
                   })}
                 </ul>
@@ -191,24 +191,24 @@ const Skills = () => {
 
         <ul
           id='parent-main-text'
-          className='sm:hidden lg:block w-[50%] absolute right-0 bottom-0 top-0  z-[0] py-[7.2rem] '
+          className='sm:hidden lg:block w-[50%] absolute right-0 bottom-0 top-0  z-[0] py-sp-20 '
         >
           <li
             id={ContentSkills.mainText.id}
-            className='flex flex-col gap-[3rem] px-[7.2rem]'
+            className='flex flex-col gap-sp-50 px-sp-20'
           >
-            <h1 className='text-white_10 text-f-25'>
+            <h1 className='text-white_10 subtitle'>
               {ContentSkills.mainText.title}
             </h1>
-            <p className='text-white_10 text-f-40'>
+            <p className='text-white_10 normalText'>
               {ContentSkills.mainText.content_1}
             </p>
-            <p ref={blinkTextRef} className='text-white_10 text-f-40'>
+            <p ref={blinkTextRef} className='text-white_10 normalText'>
               {ContentSkills.mainText.content_2}
             </p>
             <button
               onClick={() => setAllActive(true)}
-              className='text-white_10 text-f-40 border-[2px] border-soild border-white_10 w-max px-[2rem] py-[0.5rem] rounded-[3rem] transition-all duration-[0.7s] hover:bg-white_10 hover:text-blue_10'
+              className='text-white_10 text-f-40 border-[2px] border-soild border-white_10 w-max px-sp-60 py-[0.5rem] rounded-[3rem] transition-all duration-[0.7s] hover:bg-white_10 hover:text-blue_10'
             >
               {ContentSkills.mainText.button}
             </button>
@@ -218,30 +218,30 @@ const Skills = () => {
         <ul id='parent-all-skills' className=' flex-1 lg:py-sp-20 sm:py-sp-50'>
           <li
             ref={allSkillsRef}
-            className='flex flex-col gap-[3rem] lg:px-sp-20 sm:px-sp-50 translate-x-[calc(100%+10rem)]'
+            className='flex flex-col gap-sp-50 lg:px-sp-20 sm:px-sp-50 translate-x-[calc(100%+10rem)]'
           >
-            <h1 className='text-white_10 text-f-25'>
+            <h1 className='text-white_10 subtitle'>
               {ContentSkills.allSkills.title}
             </h1>
-            <p className='text-white_10 text-f-40'>
+            <p className='text-white_10 normalText'>
               {ContentSkills.allSkills.content_1}
             </p>
-            <p className='text-white_10 text-f-40'>
+            <p className='text-white_10 normalText'>
               {ContentSkills.allSkills.content_2}
             </p>
 
-            <ul className='flex flex-wrap gap-[3rem] '>
+            <ul className='flex flex-wrap gap-sp-50 '>
               {ContentSkills.allSkills.skills.map((item, index) => {
                 return React.cloneElement(item, {
                   key: index,
-                  className: `fill-white w-[5rem] h-[5rem]`,
+                  className: `fill-white w-sp-40 h-sp-40`,
                 });
               })}
             </ul>
 
             <button
               onClick={() => setAllActive(false)}
-              className='sm:hidden lg:block bg-yellow_10 text-black_10 text-f-40 border-[2px] border-soild border-yellow_10 w-max px-[2rem] py-[0.5rem] rounded-[3rem] transition-all duration-[0.7s] hover:bg-white_10 hover:text-blue_10 hover:border-white_10'
+              className='sm:hidden lg:block bg-yellow_10 text-black_10 text-f-40 border-[2px] border-soild border-yellow_10 w-max px-sp-60 py-[0.5rem] rounded-[3rem] transition-all duration-[0.7s] hover:bg-white_10 hover:text-blue_10 hover:border-white_10'
             >
               {ContentSkills.allSkills.button}
             </button>
@@ -250,7 +250,7 @@ const Skills = () => {
 
         <span
           ref={dotRef}
-          className='fixed top-[0] left-[0] w-[1.2rem] h-[1.2rem] bg-blue_10 rounded-[50%] pointer-events-none z-[1000] opacity-0'
+          className='fixed top-[0] left-[0] w-sp-80 h-sp-80 bg-blue_10 rounded-[50%] pointer-events-none z-[1000] opacity-0'
         ></span>
       </div>
     </div>
