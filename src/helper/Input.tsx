@@ -24,9 +24,9 @@ const Input = ({ onChange, name, placeholder, value, onBlur, error }: InputProps
         autoComplete='on'
         id={name}
         name={name}
-        className='placeholder-blue_10 text-blue_10 text-f-40 border-solid border-[2px] border-blue_10 outline-none rounded-[3rem] px-[2rem] w-full bg-white_10'
+        className='placeholder-blue_10 text-blue_10 normalText border-solid border-[2px] border-blue_10 outline-none rounded-[3rem] px-[2rem] w-full bg-white_10'
       />
-      <p className='text-f-40 text-[#e02727] mt-[1rem]'>{error}</p>
+      <p className='normalText text-red_10 mt-[1rem]'>{error}</p>
     </li>
   );
 };

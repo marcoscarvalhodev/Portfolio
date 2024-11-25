@@ -10,9 +10,12 @@ export function UseMediaQuery(query: string): boolean {
 
   const [matches, setMatches] = React.useState<boolean>(getMatches(query));
 
+
   React.useEffect(() => {
     function handleChange() {
       setMatches(getMatches(query));
+
+     
     }
 
     const matchMedia = window.matchMedia(query);

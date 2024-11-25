@@ -1,10 +1,10 @@
 .menuButton {
-  @apply w-[3.5rem] h-[0.5rem] hover:bg-yellow_10 bg-blue_10 block relative mt-[2rem] transition-all duration-[1s];
+  @apply w-[3.5rem] h-[0.5rem]  bg-blue_10 block relative mt-[2rem] transition-all duration-[1s];
 }
 
 .menuButton:before,
 .menuButton:after {
-  @apply absolute content-[""] hover:bg-yellow_10 block w-full h-[0.5rem] bg-blue_10 transition-all duration-[1s] right-0;
+  @apply absolute content-[""]  block w-full h-[0.5rem] bg-blue_10 transition-all duration-[1s] right-0;
 }
 
 .menuButtonOn {

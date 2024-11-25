@@ -32,7 +32,7 @@ const NavBarMobile = () => {
       triggers.forEach((trigger) => {
         ScrollTrigger.create({
           trigger: trigger,
-          markers: true,
+
           start: 'top +=50px',
           end: 'bottom +=50px',
           onEnter: () => {
@@ -72,7 +72,7 @@ const NavBarMobile = () => {
   }, [menuButtonOn]);
 
   return (
-    <header className='fixed flex items-center flex-row-reverse justify-between z-[999] w-screen'>
+    <header className='top-0 fixed flex items-center flex-row-reverse justify-between z-[999] w-screen'>
       <nav
         id='button-menu-1'
         className='flex justify-end px-[2rem] py-[2rem] relative z-[1000]'
@@ -96,7 +96,7 @@ const NavBarMobile = () => {
       >
         <a
           href=''
-          className='text-[1.8rem] text-blue_10 hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] text-center block p-[1rem] px-[3rem] '
+          className='text-f-50 text-blue_10 hover:bg-blue_10 hover:text-[#edf1f7de] transition-all duration-[1s] text-center block p-[1rem] px-sp-50 xsm:text-f-60'
         >
           {ContentNav.nav_2}
         </a>
