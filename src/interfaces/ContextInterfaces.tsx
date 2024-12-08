@@ -1,5 +1,6 @@
 import React from 'react';
 import { addProjectsProps } from '../context/VideoProjectsContext';
+import * as THREE from 'three';
 
 export interface BaseballContextInterface {
   projectsInView: boolean;
@@ -24,4 +25,9 @@ export interface VideoProjectsContextInterface {
 export interface MenuMobileInterface {
   menuButtonOn: boolean;
   setMenuButtonOn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface TransitionContextInterface {
+  refTextOpacity1: React.MutableRefObject<THREE.Mesh | null>;
+  refTextOpacity2: React.MutableRefObject<THREE.Mesh | null>;
 }

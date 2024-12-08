@@ -63,7 +63,7 @@ const ProjectsContainer = ({
         <a
           href={link}
           target='_blank'
-          className=' scale-90 hover:scale-100 text-black_10 hover:text-[#fcfeff] hover:bg-blue_10 transition-all duration-[0.6s] absolute -translate-x-[50%] -translate-y-[50%] left-[50%] top-[50%] bg-[#c59c06] rounded-[50%] py-[4rem] px-[3.2rem] xsm:text-f-50 sm:text-f-40 md:text-f-50 lg:text-f-40'
+          className=' scale-90 hover:scale-100 text-black_10 hover:text-[#fcfeff] hover:bg-blue_10 transition-all duration-[0.6s] absolute -translate-x-[50%] -translate-y-[50%] left-[50%] top-[50%] bg-yellow_10 rounded-[50%] xsm:py-sp-50 xsm:px-sp-60 sm:py-sp-40 sm:px-sp-50 normalText'
         >
           View
         </a>
