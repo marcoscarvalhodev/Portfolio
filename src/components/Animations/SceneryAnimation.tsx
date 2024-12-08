@@ -25,7 +25,7 @@ type GLTFResult = GLTF & {
     Text: THREE.Mesh;
     Plane002: THREE.Mesh;
   };
-  materials: {};
+  materials: {"": THREE.MeshStandardMaterial};
 };
 
 export function SceneryAnimation(props: JSX.IntrinsicElements['group']) {

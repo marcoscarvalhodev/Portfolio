@@ -10,7 +10,7 @@ type GLTFResult = GLTF & {
     Cube007: THREE.SkinnedMesh;
     root: THREE.Bone;
   };
-  materials: {};
+  materials: {"":THREE.MeshStandardMaterial};
 };
 
 type ActionName = 'fox-rig-animation' | 'fox-key-animation' | 'Key.002Action';

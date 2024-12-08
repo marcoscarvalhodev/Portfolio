@@ -9,7 +9,7 @@ type GLTFResult = GLTF & {
     Mesh_1001: THREE.SkinnedMesh;
     Hips2: THREE.Bone;
   };
-  materials: {};
+  materials: {'': THREE.MeshStandardMaterial};
 };
 
 type ActionName = 'snake-rig-animation';

@@ -19,7 +19,7 @@ type GLTFResult = GLTF & {
     ['MCH-upper_arm_ik_targetparentR']: THREE.Bone;
     neutral_bone: THREE.Bone;
   };
-  materials: {};
+materials: {"": any};
 };
 
 type ActionName =

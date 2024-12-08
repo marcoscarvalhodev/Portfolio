@@ -33,7 +33,7 @@ type GLTFResult = GLTF & {
     Bone_3: THREE.Bone;
     Bone_1: THREE.Bone;
   };
-  materials: {};
+  materials: {'': THREE.MeshStandardMaterial};
 };
 
 type ActionName =
