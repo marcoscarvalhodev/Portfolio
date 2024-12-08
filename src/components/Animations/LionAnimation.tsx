@@ -19,7 +19,7 @@ type GLTFResult = GLTF & {
     ['MCH-hand_ikparentR']: THREE.Bone;
     ['MCH-upper_arm_ik_targetparentR']: THREE.Bone;
   };
-  materials: {};
+  materials: { '': THREE.MeshStandardMaterial };
 };
 
 type ActionName = 'lion-rig-animation' | 'Key.003Action' | 'lion-key-animation';
@@ -41,10 +41,10 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
   });
 
   React.useEffect(() => {
-   actions['lion-rig-animation']?.play();
-   actions['Key.003Action']?.play();
-   actions['lion-key-animation']?.play();
-  })
+    actions['lion-rig-animation']?.play();
+    actions['Key.003Action']?.play();
+    actions['lion-key-animation']?.play();
+  });
 
   return (
     <group ref={group} {...props} dispose={null}>
