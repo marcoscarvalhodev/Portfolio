@@ -46,7 +46,6 @@ const Hero = () => {
         start: `top ${smallScreen ? '=+80px' : '=+100px'}`,
         end: `bottom ${smallScreen ? '=+110px' : '=+200px'}`,
         toggleActions: 'play reverse play reverse',
-        markers: true,
         onEnter: () => {
           changeTextColor({
             color_1: white_10,
@@ -85,15 +84,11 @@ const Hero = () => {
         <span className='subtitle introduction text-blue_10  font-bold'>
           I'm{' '}
         </span>
-        <span
-          className={`subtitle introduction text-blue_10 font-bold`}
-        >
+        <span className={`subtitle introduction text-blue_10 font-bold`}>
           MARCOS CARVALHO
         </span>
       </h1>
-      <p
-        className={`introduction-1 text-black_10 text-f-30 md:w-[50rem] `}
-      >
+      <p className={`introduction-1 text-black_10 normalText md:w-[50rem] `}>
         software engineer with strong focus in development of dynamic 3D
         experiences.
       </p>

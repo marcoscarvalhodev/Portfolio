@@ -12,6 +12,8 @@ import Skills from './components/Skills/Skills';
 import ScreenSizes from './hooks/screenSizes';
 import NavBarMobile from './components/NavBar/NavBarMobile';
 import { UseMenuMobileContext } from './context/UseContext';
+import CircleProgress from './components/CircleProgress/CircleProgress';
+import Footer from './components/Footer/Footer';
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function App() {
@@ -46,7 +48,10 @@ function App() {
       {smallScreen ? <NavBarMobile /> : <NavBar />}
 
       <main>
-        <section id='section1' className='top-sec w-full  relative z-[50] h-[100vh]'>
+        <section
+          id='section1'
+          className='top-sec w-full  relative z-[50] h-[100vh]'
+        >
           <Hero />
         </section>
 
@@ -78,9 +83,12 @@ function App() {
           <button className='absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] z-[998] text-f-25 bg-transparent rounded-[4rem] border-solid border-[3px] border-blue_10 text-blue_10 py-[0.5rem] px-[2rem] hover:bg-blue_10 hover:text-white_10 transition-all duration-[0.7s]'>
             Restart animation
           </button>
-          <BaseballCanvas />
+
+          <CircleProgress />
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 }

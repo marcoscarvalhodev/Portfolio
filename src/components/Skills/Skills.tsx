@@ -164,7 +164,7 @@ const Skills = () => {
 
         <ul
           ref={textRef}
-          className='blue-background lg:w-[50%] sm:w-full absolute right-0 bottom-0 top-0 z-[-1] py-sp-20 bg-blue_10'
+          className='progress-white blue-background lg:w-[50%] sm:w-full absolute right-0 bottom-0 top-0 z-[-1] py-sp-20 bg-blue_10'
         >
           {ContentSkills.contents.map(({ title, content, id, skills }) => {
             return (

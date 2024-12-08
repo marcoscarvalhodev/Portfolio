@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { CreateBaseballContext } from './BaseballContext';
 import { CreateVideoProjectsContext } from './VideoProjectsContext';
 import { CreateMenuMobileContext } from './MenuMobileContext';
+import { CreateTransitionContext } from './TransitionContext';
 
 export const UseBaseballContext = () => {
   const useBaseballContext = useContext(CreateBaseballContext);
@@ -28,4 +29,14 @@ export const UseMenuMobileContext = () => {
   }
 
   return useMenuMobileContext;
+};
+
+export const UseTransitionContext = () => {
+  const useTransitionContext = useContext(CreateTransitionContext);
+
+  if (!useTransitionContext) {
+    throw new Error('there is no transition context');
+  }
+
+  return useTransitionContext;
 };
