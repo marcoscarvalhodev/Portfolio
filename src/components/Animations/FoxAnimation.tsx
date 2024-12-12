@@ -10,7 +10,7 @@ type GLTFResult = GLTF & {
     Cube007: THREE.SkinnedMesh;
     root: THREE.Bone;
   };
-  materials: {"":THREE.MeshStandardMaterial};
+  materials: { '': THREE.MeshStandardMaterial };
 };
 
 type ActionName = 'fox-rig-animation' | 'fox-key-animation' | 'Key.002Action';
@@ -21,7 +21,7 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials, animations } = useGLTF(
     '/fox-opt-v1.glb'
   ) as GLTFResult;
-  const { actions } = useAnimations(animations, group);
+  const { actions, mixer } = useAnimations(animations, group);
 
   const texture = useLoader(TextureLoader, '/fox-bake.jpg');
 
@@ -29,12 +29,16 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
     texture.flipY = false;
     const selectedMaterial = materials[''];
     selectedMaterial.map = texture;
+    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
   });
 
   React.useEffect(() => {
-    actions['fox-rig-animation']?.play();
-    actions['fox-key-animation']?.play();
-    actions['Key.002Action']?.play();
+    animations.forEach((clip) => {
+      const action = mixer.clipAction(clip);
+      action.repetitions = 1;
+      action.clampWhenFinished = true;
+      action.play();
+    });
   });
 
   return (
@@ -42,6 +46,7 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
       <group name='Scene'>
         <group name='fox-armature-1' position={[-228.109, 0.965, 312.407]}>
           <skinnedMesh
+            castShadow
             name='Cube007'
             geometry={nodes.Cube007.geometry}
             material={nodes.Cube007.material}

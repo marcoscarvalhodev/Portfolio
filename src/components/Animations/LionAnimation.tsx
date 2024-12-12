@@ -30,7 +30,7 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials, animations } = useGLTF(
     '/lion-opt-v1.glb'
   ) as GLTFResult;
-  const { actions } = useAnimations(animations, group);
+  const { actions, mixer } = useAnimations(animations, group);
 
   const texture = useLoader(TextureLoader, '/lion-bake.jpg');
 
@@ -38,12 +38,16 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
     texture.flipY = false;
     const selectedMaterial = materials[''];
     selectedMaterial.map = texture;
+    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
   });
 
   React.useEffect(() => {
-    actions['lion-rig-animation']?.play();
-    actions['Key.003Action']?.play();
-    actions['lion-key-animation']?.play();
+    animations.forEach((clip) => {
+      const action = mixer.clipAction(clip);
+      action.repetitions = 1;
+      action.clampWhenFinished = true;
+      action.play();
+    });
   });
 
   return (
@@ -51,6 +55,7 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
       <group name='Scene'>
         <group name='lion-main-rig' position={[-47.112, 5.2, 495.341]}>
           <skinnedMesh
+            castShadow
             name='object_0001'
             geometry={nodes.object_0001.geometry}
             material={nodes.object_0001.material}

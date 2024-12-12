@@ -1,8 +1,9 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import FullCanvasAnimations from '../FullCanvasAnimations/FullCanvasAnimations';
-import { PerspectiveCamera, Sky } from '@react-three/drei';
+import { PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
+import SceneryLights from '../Lights/SceneryLights';
 
 const FullCanvas = () => {
   const canvasRef = React.useRef<HTMLDivElement | null>(null);
@@ -17,7 +18,6 @@ const FullCanvas = () => {
         shadows
         gl={{ toneMapping: THREE.NeutralToneMapping }}
       >
-        <Sky distance={200} />
         <PerspectiveCamera
           name='Camera'
           makeDefault={true}
@@ -27,15 +27,11 @@ const FullCanvas = () => {
           position={[30.641, 20.913, 45.138]}
           rotation={[-0.3, 0.7, 0]}
         />
-        <directionalLight
-          intensity={5}
-          position={[40, 100, 40]}
-          castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-          shadow-camera-far={1000}
-          shadow-camera-near={0.1}
-        />
+
+        <SceneryLights />
+
+        {/*<ambientLight intensity={100} color={"#ffffff"}/>*/}
+
         <group dispose={null} scale={0.05} position={[0, 0, 0]}>
           <FullCanvasAnimations />
         </group>

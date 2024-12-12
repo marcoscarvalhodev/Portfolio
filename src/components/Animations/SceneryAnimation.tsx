@@ -1,36 +1,35 @@
-import * as THREE from 'three';
-import React, { useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
-import { GLTF } from 'three-stdlib';
-import { TextureLoader } from 'three';
-import { useLoader } from '@react-three/fiber';
+import * as THREE from 'three'
+import React, { useRef } from 'react'
+import { useGLTF } from '@react-three/drei'
+import { GLTF } from 'three-stdlib'
+import { TextureLoader } from 'three'
+import { useLoader } from '@react-three/fiber'
+
 type GLTFResult = GLTF & {
   nodes: {
-    Plane001: THREE.Mesh;
-    Cube001: THREE.Mesh;
-    Cube002: THREE.Mesh;
-    Cube003: THREE.Mesh;
-    Plane: THREE.Mesh;
-    Cube004: THREE.Mesh;
-    Cube005: THREE.Mesh;
-    ['40Rocksobj005']: THREE.Mesh;
-    ['cactus-1001']: THREE.Mesh;
-    ['cactus-1003']: THREE.Mesh;
-    ['merged-field001']: THREE.Mesh;
-    ['merged-field003']: THREE.Mesh;
-    ['40Rocksobj002']: THREE.Mesh;
-    ['40Rocksobj003']: THREE.Mesh;
-    Cylinder001: THREE.Mesh;
-    bull_skull: THREE.Mesh;
-    Text: THREE.Mesh;
-    Plane002: THREE.Mesh;
-  };
-  materials: {"": THREE.MeshStandardMaterial};
-};
+    Cube001: THREE.Mesh
+    Cube002: THREE.Mesh
+    Cube003: THREE.Mesh
+    Plane: THREE.Mesh
+    Cube004: THREE.Mesh
+    Cube005: THREE.Mesh
+    ['40Rocksobj005']: THREE.Mesh
+    ['cactus-1001']: THREE.Mesh
+    ['cactus-1003']: THREE.Mesh
+    ['merged-field001']: THREE.Mesh
+    ['merged-field003']: THREE.Mesh
+    ['40Rocksobj002']: THREE.Mesh
+    ['40Rocksobj003']: THREE.Mesh
+    Cylinder001: THREE.Mesh
+    bull_skull: THREE.Mesh
+    Text: THREE.Mesh
+    Plane002: THREE.Mesh
+  }
+  materials: { '': THREE.MeshStandardMaterial };
+}
 
 export function SceneryAnimation(props: JSX.IntrinsicElements['group']) {
-  const group = useRef<THREE.Group | null>(null);
-  const { nodes, materials } = useGLTF('/portfolio-v1.glb') as GLTFResult;
+  const { nodes, materials } = useGLTF('/scenery-v1.glb') as GLTFResult
 
   const texture = useLoader(TextureLoader, '/desert_bake.jpg');
 
@@ -38,21 +37,11 @@ export function SceneryAnimation(props: JSX.IntrinsicElements['group']) {
     texture.flipY = false;
     const selectedMaterial = materials[''];
     selectedMaterial.map = texture;
+    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
   });
-  
+
   return (
-    <group
-      ref={group}
-      {...props}
-      
-    >
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Plane001.geometry}
-        material={nodes.Plane001.material}
-        position={[-27.523, -2.596, -26.837]}
-      />
+    <group {...props} dispose={null}>
       <mesh
         castShadow
         receiveShadow
@@ -187,10 +176,10 @@ export function SceneryAnimation(props: JSX.IntrinsicElements['group']) {
         receiveShadow
         geometry={nodes.Plane002.geometry}
         material={nodes.Plane002.material}
-        position={[0, 0.131, 0]}
+        position={[0, 23.819, 0]}
       />
     </group>
-  );
+  )
 }
 
-useGLTF.preload('/portfolio-v1.glb');
+useGLTF.preload('/scenery-v1.glb')

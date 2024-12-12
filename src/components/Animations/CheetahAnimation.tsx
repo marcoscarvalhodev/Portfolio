@@ -19,7 +19,7 @@ type GLTFResult = GLTF & {
     ['MCH-upper_arm_ik_targetparentR']: THREE.Bone;
     neutral_bone: THREE.Bone;
   };
-materials: {"": any};
+  materials: { '': THREE.MeshStandardMaterial };
 };
 
 type ActionName =
@@ -33,7 +33,7 @@ export function CheetahAnimation(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials, animations } = useGLTF(
     '/cheetah-opt-v1.glb'
   ) as GLTFResult;
-  const { actions } = useAnimations(animations, group);
+  const { actions, mixer } = useAnimations(animations, group);
 
   const texture = useLoader(TextureLoader, '/cheetah-bake.jpg');
 
@@ -41,14 +41,17 @@ export function CheetahAnimation(props: JSX.IntrinsicElements['group']) {
     texture.flipY = false;
     const selectedMaterial = materials[''];
     selectedMaterial.map = texture;
+    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
   });
 
   React.useEffect(() => {
-    console.log(actions);
-    actions['Key.001Action.001']?.play();
-    actions['cheetah-key-animation']?.play();
-    actions['cheetah-rig-animation']?.play();
-
+    animations.forEach((clip) => {
+      const action = mixer.clipAction(clip);
+      action.repetitions = 1;
+      action.clampWhenFinished = true;
+      action.play();
+      
+    });
   });
 
   return (
@@ -56,6 +59,7 @@ export function CheetahAnimation(props: JSX.IntrinsicElements['group']) {
       <group name='Scene'>
         <group name='cheetah-rig-main'>
           <skinnedMesh
+            castShadow
             name='cheetah'
             geometry={nodes.cheetah.geometry}
             material={nodes.cheetah.material}
