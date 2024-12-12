@@ -2,9 +2,10 @@ import * as THREE from 'three';
 import React, { useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import { useFrame, useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
 import { UseTransitionContext } from '../../context/UseContext';
+import { useLoader } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
+import { TextureLoader } from 'three';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -32,16 +33,17 @@ type GLTFResult = GLTF & {
     Bone_2: THREE.Bone;
     Bone_3: THREE.Bone;
     Bone_1: THREE.Bone;
+    ['ORG-spine_1']: THREE.Bone;
   };
-  materials: {'': THREE.MeshStandardMaterial};
+  materials: { '': THREE.MeshStandardMaterial };
 };
 
 type ActionName =
-  | 'tumbleweedAction'
-  | 'pitcher-rigAction'
-  | 'Armature.002Action'
+  | 'tumbleweed-rig-animation'
+  | 'walker-rig-animation'
+  | 'backpack-rig-animation'
   | 'ArmatureAction.001'
-  | 'Armature.003Action.005';
+  | 'cap-rig-animation';
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
@@ -50,7 +52,6 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
     '/walker-v1.glb'
   ) as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
-
   const { refTextOpacity1, refTextOpacity2 } = UseTransitionContext();
 
   const texture = useLoader(TextureLoader, '/walker_tumbleweed.jpg');
@@ -61,20 +62,22 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
     texture.flipY = false;
     const selectedMaterial = materials[''];
     selectedMaterial.map = texture;
+    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
   });
 
   React.useEffect(() => {
-    actions['Armature.002Action']?.play();
-    actions['Armature.003Action.005']?.play();
-    actions['ArmatureAction.001']?.play();
-    actions['pitcher-rigAction']?.play();
-    actions['tumbleweedAction']?.play();
+    animations.forEach((clip) => {
+      const action = mixer.clipAction(clip);
+      action.repetitions = 1;
+      action.clampWhenFinished = true;
+      action.play();
+    });
   });
 
   useFrame(() => {
-    const walkerTime = actions['Armature.002Action']?.time;
+    const walkerTime = actions['walker-rig-animation']?.time;
 
-    if (walkerTime && walkerTime > 49 && walkerTime < 51) {
+    if (walkerTime && walkerTime > 49 && walkerTime < 52) {
       if (opacityText1 > 0) {
         const material = refTextOpacity1.current?.material as THREE.Material;
         opacityText1 -= 0.01;
@@ -88,7 +91,7 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
       }
     }
 
-    if(walkerTime && walkerTime > 65 && walkerTime < 67) {
+    if (walkerTime && walkerTime > 65 && walkerTime < 68) {
       if (opacityText1 < 1) {
         const material = refTextOpacity1.current?.material as THREE.Material;
         opacityText1 += 0.01;
@@ -104,13 +107,8 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
 
     return null;
   });
-
   return (
-    <group
-      ref={group}
-      {...props}
-      
-    >
+    <group ref={group} {...props} dispose={null}>
       <group name='Scene'>
         <mesh
           name='tumbleweed'
@@ -201,6 +199,9 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
         </group>
         <group name='Armature003' position={[0, 4.494, 0.13]}>
           <primitive object={nodes.Bone_1} />
+        </group>
+        <group name='rig001'>
+          <primitive object={nodes['ORG-spine_1']} />
         </group>
       </group>
     </group>
