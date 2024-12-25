@@ -10,7 +10,7 @@ const SceneryLights = () => {
       <directionalLight
         ref={lightRef}
         intensity={4}
-        position={[90, 90, 90]}
+        position={[60, 90, 60]}
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}

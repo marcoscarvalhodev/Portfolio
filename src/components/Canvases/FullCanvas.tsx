@@ -30,8 +30,6 @@ const FullCanvas = () => {
 
         <SceneryLights />
 
-        {/*<ambientLight intensity={100} color={"#ffffff"}/>*/}
-
         <group dispose={null} scale={0.05} position={[0, 0, 0]}>
           <FullCanvasAnimations />
         </group>
