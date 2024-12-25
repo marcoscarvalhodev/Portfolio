@@ -1,9 +1,12 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import { useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
+import CrossFade, {
+  CrossFadeRefProps,
+} from '../../Shaders/CrossFade/CrossFade';
+import { useFrame } from '@react-three/fiber';
+
 type GLTFResult = GLTF & {
   nodes: {
     cheetah: THREE.SkinnedMesh;
@@ -33,15 +36,38 @@ export function CheetahAnimation(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials, animations } = useGLTF(
     '/cheetah-opt-v1.glb'
   ) as GLTFResult;
-  const { actions, mixer } = useAnimations(animations, group);
+  const { mixer, actions } = useAnimations(animations, group);
+  const [crossFadeState, setCrossFadeState] = React.useState(false);
+  const cheetahFired = React.useRef(false);
+  const crossFadeRef = React.useRef<CrossFadeRefProps | null>(null);
 
-  const texture = useLoader(TextureLoader, '/cheetah-bake.jpg');
+  const [texture1, texture2, dispTexture] = useTexture([
+    '/cheetah-bake-plain.jpg',
+    '/cheetah-bake.jpg',
+    '/disp_texture.jpg',
+  ]);
+
+  CrossFade({ crossFadeState, crossFadeRef });
 
   React.useLayoutEffect(() => {
-    texture.flipY = false;
-    const selectedMaterial = materials[''];
-    selectedMaterial.map = texture;
-    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
+    texture1.flipY = false;
+    texture2.flipY = false;
+  });
+
+  useFrame(() => {
+    const cheetahTime = actions['cheetah-rig-animation']?.time;
+
+    if (cheetahTime) {
+      if (cheetahTime > 16 && cheetahTime < 17 && !cheetahFired.current) {
+        setCrossFadeState(true);
+        cheetahFired.current = true;
+      }
+
+      if (cheetahTime > 66.5 && cheetahTime < 67.5 && cheetahFired.current) {
+        setCrossFadeState(false);
+        cheetahFired.current = false;
+      }
+    }
   });
 
   React.useEffect(() => {
@@ -50,7 +76,6 @@ export function CheetahAnimation(props: JSX.IntrinsicElements['group']) {
       action.repetitions = 1;
       action.clampWhenFinished = true;
       action.play();
-      
     });
   });
 
@@ -66,7 +91,15 @@ export function CheetahAnimation(props: JSX.IntrinsicElements['group']) {
             skeleton={nodes.cheetah.skeleton}
             morphTargetDictionary={nodes.cheetah.morphTargetDictionary}
             morphTargetInfluences={nodes.cheetah.morphTargetInfluences}
-          />
+          >
+            <crossFadeMaterial
+              ref={crossFadeRef}
+              tex={texture1}
+              tex2={texture2}
+              disp={dispTexture}
+            
+            />
+          </skinnedMesh>
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
           <primitive object={nodes['MCH-foot_ikparentL']} />

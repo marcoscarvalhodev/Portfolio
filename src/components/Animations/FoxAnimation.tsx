@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, useTexture } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { GLTF } from 'three-stdlib';
-import { useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
-
+import CrossFade, {
+  CrossFadeRefProps,
+} from '../../Shaders/CrossFade/CrossFade';
 type GLTFResult = GLTF & {
   nodes: {
     Cube007: THREE.SkinnedMesh;
@@ -23,13 +24,20 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
   ) as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
 
-  const texture = useLoader(TextureLoader, '/fox-bake.jpg');
+  const crossFadeRef = React.useRef<null | CrossFadeRefProps>(null);
+  const [crossFadeState, setCrossFadeState] = React.useState(false);
+  const FoxFired = React.useRef(false);
+
+  const [texture1, texture2, dispTexture] = useTexture([
+    '/fox-bake-plain.jpg',
+    '/fox-bake.jpg',
+    'disp_texture.jpg',
+  ]);
+
 
   React.useLayoutEffect(() => {
-    texture.flipY = false;
-    const selectedMaterial = materials[''];
-    selectedMaterial.map = texture;
-    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
+    texture1.flipY = false;
+    texture2.flipY = false;
   });
 
   React.useEffect(() => {
@@ -40,6 +48,22 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
       action.play();
     });
   });
+
+  useFrame(() => {
+      const foxTime = actions['fox-rig-animation']?.time;
+  
+      if (foxTime) {
+        if (foxTime > 6.2 && foxTime < 7.2 && !FoxFired.current) {
+          setCrossFadeState(true);
+          FoxFired.current = true;
+        }
+  
+        if (foxTime > 67 && foxTime < 68 && FoxFired.current) {
+          setCrossFadeState(false);
+          FoxFired.current = false;
+        }
+      }
+    });
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -53,7 +77,14 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
             skeleton={nodes.Cube007.skeleton}
             morphTargetDictionary={nodes.Cube007.morphTargetDictionary}
             morphTargetInfluences={nodes.Cube007.morphTargetInfluences}
-          />
+          >
+            <crossFadeMaterial
+              ref={crossFadeRef}
+              tex={texture1}
+              tex2={texture2}
+              disp={dispTexture}
+            />
+          </skinnedMesh>
           <primitive object={nodes.root} />
         </group>
       </group>

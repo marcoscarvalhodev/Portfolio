@@ -1,9 +1,11 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { useGLTF, useAnimations, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import { useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
+import CrossFade, {
+  CrossFadeRefProps,
+} from '../../Shaders/CrossFade/CrossFade';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -27,18 +29,26 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 export function LionAnimation(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group | null>(null);
-  const { nodes, materials, animations } = useGLTF(
-    '/lion-opt-v1.glb'
-  ) as GLTFResult;
-  const { actions, mixer } = useAnimations(animations, group);
+  const { nodes, animations } = useGLTF('/lion-opt-v1.glb') as GLTFResult;
+  const { mixer, actions } = useAnimations(animations, group);
+  const crossFadeRef = React.useRef<CrossFadeRefProps | null>(null);
+  const [crossFadeState, setCrossFadeState] = React.useState(false);
+  const lionFired = React.useRef(false);
+  const dispFactor = 0;
+  const [texture1, texture2, dispTexture] = useTexture([
+    '/lion-bake-plain.jpg',
+    'lion-bake.jpg',
+    'disp_texture.jpg',
+  ]);
 
-  const texture = useLoader(TextureLoader, '/lion-bake.jpg');
+  CrossFade({
+    crossFadeState,
+    crossFadeRef
+  });
 
   React.useLayoutEffect(() => {
-    texture.flipY = false;
-    const selectedMaterial = materials[''];
-    selectedMaterial.map = texture;
-    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
+    texture1.flipY = false;
+    texture2.flipY = false;
   });
 
   React.useEffect(() => {
@@ -48,6 +58,22 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
       action.clampWhenFinished = true;
       action.play();
     });
+  });
+
+  useFrame(() => {
+    const lionTime = actions['lion-rig-animation']?.time;
+
+    if (lionTime) {
+      if (lionTime > 39 && lionTime < 40 && !lionFired.current) {
+        setCrossFadeState(true);
+        lionFired.current = true;
+      }
+
+      if (lionTime > 76 && lionTime < 77 && lionFired.current) {
+        setCrossFadeState(false);
+        lionFired.current = false;
+      }
+    }
   });
 
   return (
@@ -62,7 +88,14 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
             skeleton={nodes.object_0001.skeleton}
             morphTargetDictionary={nodes.object_0001.morphTargetDictionary}
             morphTargetInfluences={nodes.object_0001.morphTargetInfluences}
-          />
+          >
+            <crossFadeMaterial
+              ref={crossFadeRef}
+              tex={texture1}
+              tex2={texture2}
+              disp={dispTexture}
+            />
+          </skinnedMesh>
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
           <primitive object={nodes['MCH-foot_ikparentL']} />

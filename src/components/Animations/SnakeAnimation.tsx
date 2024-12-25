@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { useLoader } from '@react-three/fiber';
 import { TextureLoader } from 'three';
@@ -22,19 +22,18 @@ export function SnakeAnimation(props: JSX.IntrinsicElements['group']) {
     '/snake-v1.glb'
   ) as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
-  const texture = useLoader(TextureLoader, '/snake-bake.jpg');
+  const texture = useTexture("/snake-bake.jpg");
 
   React.useLayoutEffect(() => {
     texture.flipY = false;
     const selectedMaterial = materials[''];
     selectedMaterial.map = texture;
-    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
+    
   });
 
   React.useEffect(() => {
     animations.forEach((clip) => {
       const action = mixer.clipAction(clip);
-
       action.repetitions = 1;
       action.clampWhenFinished = true;
       action.play();
@@ -45,6 +44,7 @@ export function SnakeAnimation(props: JSX.IntrinsicElements['group']) {
       <group name='Scene'>
         <group name='Armature001' position={[0, 0, 36.911]}>
           <skinnedMesh
+            castShadow
             name='Mesh_1001'
             geometry={nodes.Mesh_1001.geometry}
             material={nodes.Mesh_1001.material}

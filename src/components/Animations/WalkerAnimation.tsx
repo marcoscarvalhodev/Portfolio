@@ -121,42 +121,56 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
         />
         <group name='pitcher-rig'>
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='eye_iris'
             geometry={nodes.eye_iris.geometry}
             material={nodes.eye_iris.material}
             skeleton={nodes.eye_iris.skeleton}
           />
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='FMB_Shoes_01_L'
             geometry={nodes.FMB_Shoes_01_L.geometry}
             material={nodes.FMB_Shoes_01_L.material}
             skeleton={nodes.FMB_Shoes_01_L.skeleton}
           />
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='FMB_Shoes_01_R'
             geometry={nodes.FMB_Shoes_01_R.geometry}
             material={nodes.FMB_Shoes_01_R.material}
             skeleton={nodes.FMB_Shoes_01_R.skeleton}
           />
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='FoamFinger001'
             geometry={nodes.FoamFinger001.geometry}
             material={nodes.FoamFinger001.material}
             skeleton={nodes.FoamFinger001.skeleton}
           />
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='pitcher-body001'
             geometry={nodes['pitcher-body001'].geometry}
             material={nodes['pitcher-body001'].material}
             skeleton={nodes['pitcher-body001'].skeleton}
           />
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='pitcher-body002'
             geometry={nodes['pitcher-body002'].geometry}
             material={nodes['pitcher-body002'].material}
             skeleton={nodes['pitcher-body002'].skeleton}
           />
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='pitcher-body003'
             geometry={nodes['pitcher-body003'].geometry}
             material={nodes['pitcher-body003'].material}
@@ -174,6 +188,8 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
           <primitive object={nodes['MCH-thigh_ik_targetparentR']} />
         </group>
         <skinnedMesh
+          castShadow
+          receiveShadow
           name='pitcher-cap'
           geometry={nodes['pitcher-cap'].geometry}
           material={nodes['pitcher-cap'].material}
@@ -181,6 +197,8 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
         />
         <group name='Armature002' position={[-0.717, 3.289, -8.867]}>
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='bag001_low'
             geometry={nodes.bag001_low.geometry}
             material={nodes.bag001_low.material}
@@ -190,6 +208,8 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
         </group>
         <group name='Armature'>
           <skinnedMesh
+            castShadow
+            receiveShadow
             name='SM_Body_L001'
             geometry={nodes.SM_Body_L001.geometry}
             material={nodes.SM_Body_L001.material}
