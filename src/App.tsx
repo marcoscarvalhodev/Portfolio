@@ -1,5 +1,4 @@
 import React, { Suspense, useEffect } from 'react';
-import BaseballCanvas from './components/Canvases/BaseballCanvas';
 import FullCanvas from './components/Canvases/FullCanvas';
 import Hero from './components/Hero/Hero';
 import NavBar from './components/NavBar/NavBar';
