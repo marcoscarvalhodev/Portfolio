@@ -21,12 +21,8 @@ const SceneryLights = () => {
       />
 
       {
-        <Environment
-          files={'./sky.hdr'}
-          background
-          backgroundIntensity={0.3}
-          environmentIntensity={0.3}
-        />
+
+        <ambientLight intensity={0.5}/>
       }
     </>
   );

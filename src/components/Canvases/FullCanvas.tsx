@@ -16,7 +16,7 @@ const FullCanvas = () => {
       <Canvas
         className='h-[100%] w-[100%]'
         shadows
-        gl={{ toneMapping: THREE.NeutralToneMapping }}
+        gl={{ toneMapping: THREE.NeutralToneMapping, toneMappingExposure: 1 }}
       >
         <PerspectiveCamera
           name='Camera'
@@ -27,9 +27,7 @@ const FullCanvas = () => {
           position={[30.641, 20.913, 45.138]}
           rotation={[-0.3, 0.7, 0]}
         />
-
         <SceneryLights />
-
         <group dispose={null} scale={0.05} position={[0, 0, 0]}>
           <FullCanvasAnimations />
         </group>

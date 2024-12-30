@@ -8,7 +8,6 @@ import { MessageAnimation } from '../Animations/MessageAnimation';
 import { LionAnimation } from '../Animations/LionAnimation';
 import { FoxAnimation } from '../Animations/FoxAnimation';
 import { SnakeAnimation } from '../Animations/SnakeAnimation';
-import { TreeTrunk } from '../StaticObjects/TreeTrunk';
 
 const FullCanvasAnimations = () => {
   return (
@@ -19,9 +18,8 @@ const FullCanvasAnimations = () => {
       <MessageAnimation />
       <LionAnimation />
       <CheetahAnimation />
-     
+      <FoxAnimation />
       <SnakeAnimation />
-      
     </>
   );
 };

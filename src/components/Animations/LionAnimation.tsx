@@ -3,9 +3,8 @@ import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF, useAnimations, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import CrossFade, {
-  CrossFadeRefProps,
-} from '../../Shaders/CrossFade/CrossFade';
+import CrossFade from '../../Shaders/CrossFade/CrossFade';
+import PauseOutFocus from '../../hooks/pauseOutFocus';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -31,10 +30,9 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group | null>(null);
   const { nodes, animations } = useGLTF('/lion-opt-v1.glb') as GLTFResult;
   const { mixer, actions } = useAnimations(animations, group);
-  const crossFadeRef = React.useRef<CrossFadeRefProps | null>(null);
+  const crossFadeRef = React.useRef<THREE.MeshStandardMaterial | null>(null);
   const [crossFadeState, setCrossFadeState] = React.useState(false);
   const lionFired = React.useRef(false);
-  const dispFactor = 0;
   const [texture1, texture2, dispTexture] = useTexture([
     '/lion-bake-plain.jpg',
     'lion-bake.jpg',
@@ -43,7 +41,17 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
 
   CrossFade({
     crossFadeState,
-    crossFadeRef
+    crossFadeRef,
+    texture1,
+    texture2,
+    dispTexture,
+  });
+
+  PauseOutFocus({
+    mixer,
+    setCrossFadeState,
+    time1: 39,
+    time2: 76,
   });
 
   React.useLayoutEffect(() => {
@@ -89,12 +97,7 @@ export function LionAnimation(props: JSX.IntrinsicElements['group']) {
             morphTargetDictionary={nodes.object_0001.morphTargetDictionary}
             morphTargetInfluences={nodes.object_0001.morphTargetInfluences}
           >
-            <crossFadeMaterial
-              ref={crossFadeRef}
-              tex={texture1}
-              tex2={texture2}
-              disp={dispTexture}
-            />
+            <meshStandardMaterial ref={crossFadeRef} />
           </skinnedMesh>
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />

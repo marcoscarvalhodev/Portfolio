@@ -1,23 +1,18 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
+
 import { UseTransitionContext } from '../../context/UseContext';
-import { useLoader } from '@react-three/fiber';
 import { useFrame } from '@react-three/fiber';
-import { TextureLoader } from 'three';
 
 type GLTFResult = GLTF & {
   nodes: {
     tumbleweed: THREE.Mesh;
-    eye_iris: THREE.SkinnedMesh;
-    FMB_Shoes_01_L: THREE.SkinnedMesh;
-    FMB_Shoes_01_R: THREE.SkinnedMesh;
-    FoamFinger001: THREE.SkinnedMesh;
-    ['pitcher-body001']: THREE.SkinnedMesh;
-    ['pitcher-body002']: THREE.SkinnedMesh;
-    ['pitcher-body003']: THREE.SkinnedMesh;
     ['pitcher-cap']: THREE.SkinnedMesh;
+    eye_iris: THREE.SkinnedMesh;
+    FoamFinger001: THREE.SkinnedMesh;
+    ['pitcher-body002']: THREE.SkinnedMesh;
     bag001_low: THREE.SkinnedMesh;
     SM_Body_L001: THREE.SkinnedMesh;
     root: THREE.Bone;
@@ -33,9 +28,8 @@ type GLTFResult = GLTF & {
     Bone_2: THREE.Bone;
     Bone_3: THREE.Bone;
     Bone_1: THREE.Bone;
-    ['ORG-spine_1']: THREE.Bone;
   };
-  materials: { '': THREE.MeshStandardMaterial };
+  materials: {};
 };
 
 type ActionName =
@@ -49,20 +43,17 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group | null>(null);
   const { nodes, materials, animations } = useGLTF(
-    '/walker-v1.glb'
+    '/walker-opt-v1.glb'
   ) as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
   const { refTextOpacity1, refTextOpacity2 } = UseTransitionContext();
 
-  const texture = useLoader(TextureLoader, '/walker_tumbleweed.jpg');
+  const texture = useTexture('/walker_tumbleweed.jpg');
   let opacityText1 = 1;
   let opacityText2 = 0;
 
   React.useLayoutEffect(() => {
     texture.flipY = false;
-    const selectedMaterial = materials[''];
-    selectedMaterial.map = texture;
-    materials[''] = new THREE.MeshStandardMaterial({ map: texture });
   });
 
   React.useEffect(() => {
@@ -118,64 +109,10 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
           material={nodes.tumbleweed.material}
           position={[-342.259, 17.871, -76.308]}
           rotation={[0, 0, -1.382]}
-        />
+        >
+          <meshStandardMaterial map={texture} />
+        </mesh>
         <group name='pitcher-rig'>
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='eye_iris'
-            geometry={nodes.eye_iris.geometry}
-            material={nodes.eye_iris.material}
-            skeleton={nodes.eye_iris.skeleton}
-          />
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='FMB_Shoes_01_L'
-            geometry={nodes.FMB_Shoes_01_L.geometry}
-            material={nodes.FMB_Shoes_01_L.material}
-            skeleton={nodes.FMB_Shoes_01_L.skeleton}
-          />
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='FMB_Shoes_01_R'
-            geometry={nodes.FMB_Shoes_01_R.geometry}
-            material={nodes.FMB_Shoes_01_R.material}
-            skeleton={nodes.FMB_Shoes_01_R.skeleton}
-          />
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='FoamFinger001'
-            geometry={nodes.FoamFinger001.geometry}
-            material={nodes.FoamFinger001.material}
-            skeleton={nodes.FoamFinger001.skeleton}
-          />
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='pitcher-body001'
-            geometry={nodes['pitcher-body001'].geometry}
-            material={nodes['pitcher-body001'].material}
-            skeleton={nodes['pitcher-body001'].skeleton}
-          />
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='pitcher-body002'
-            geometry={nodes['pitcher-body002'].geometry}
-            material={nodes['pitcher-body002'].material}
-            skeleton={nodes['pitcher-body002'].skeleton}
-          />
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='pitcher-body003'
-            geometry={nodes['pitcher-body003'].geometry}
-            material={nodes['pitcher-body003'].material}
-            skeleton={nodes['pitcher-body003'].skeleton}
-          />
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
           <primitive object={nodes['MCH-hand_ikparentL']} />
@@ -189,43 +126,71 @@ export function WalkerAnimation(props: JSX.IntrinsicElements['group']) {
         </group>
         <skinnedMesh
           castShadow
-          receiveShadow
           name='pitcher-cap'
           geometry={nodes['pitcher-cap'].geometry}
           material={nodes['pitcher-cap'].material}
           skeleton={nodes['pitcher-cap'].skeleton}
-        />
+        >
+          <meshStandardMaterial map={texture} />
+        </skinnedMesh>
         <group name='Armature002' position={[-0.717, 3.289, -8.867]}>
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='bag001_low'
-            geometry={nodes.bag001_low.geometry}
-            material={nodes.bag001_low.material}
-            skeleton={nodes.bag001_low.skeleton}
-          />
           <primitive object={nodes.Bone_2} />
         </group>
         <group name='Armature'>
-          <skinnedMesh
-            castShadow
-            receiveShadow
-            name='SM_Body_L001'
-            geometry={nodes.SM_Body_L001.geometry}
-            material={nodes.SM_Body_L001.material}
-            skeleton={nodes.SM_Body_L001.skeleton}
-          />
           <primitive object={nodes.Bone_3} />
         </group>
         <group name='Armature003' position={[0, 4.494, 0.13]}>
           <primitive object={nodes.Bone_1} />
         </group>
-        <group name='rig001'>
-          <primitive object={nodes['ORG-spine_1']} />
-        </group>
+        <skinnedMesh
+          castShadow
+          name='eye_iris'
+          geometry={nodes.eye_iris.geometry}
+          material={nodes.eye_iris.material}
+          skeleton={nodes.eye_iris.skeleton}
+        >
+          <meshStandardMaterial map={texture} />
+        </skinnedMesh>
+        <skinnedMesh
+          castShadow
+          name='FoamFinger001'
+          geometry={nodes.FoamFinger001.geometry}
+          material={nodes.FoamFinger001.material}
+          skeleton={nodes.FoamFinger001.skeleton}
+        >
+          <meshStandardMaterial map={texture} />
+        </skinnedMesh>
+        <skinnedMesh
+          castShadow
+          name='pitcher-body002'
+          geometry={nodes['pitcher-body002'].geometry}
+          material={nodes['pitcher-body002'].material}
+          skeleton={nodes['pitcher-body002'].skeleton}
+        >
+          <meshStandardMaterial map={texture} />
+        </skinnedMesh>
+        <skinnedMesh
+          castShadow
+          name='bag001_low'
+          geometry={nodes.bag001_low.geometry}
+          material={nodes.bag001_low.material}
+          skeleton={nodes.bag001_low.skeleton}
+          position={[-0.717, 3.289, -8.867]}
+        >
+          <meshStandardMaterial map={texture} />
+        </skinnedMesh>
+        <skinnedMesh
+          castShadow
+          name='SM_Body_L001'
+          geometry={nodes.SM_Body_L001.geometry}
+          material={nodes.SM_Body_L001.material}
+          skeleton={nodes.SM_Body_L001.skeleton}
+        >
+          <meshStandardMaterial map={texture} />
+        </skinnedMesh>
       </group>
     </group>
   );
 }
 
-useGLTF.preload('/walker-v1.glb');
+useGLTF.preload('/walker-opt-v1.glb');
