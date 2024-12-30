@@ -1,12 +1,3 @@
-  
-    varying vec2 vUv;
-    uniform sampler2D tex;
-    uniform sampler2D tex2;
-    uniform sampler2D disp;
-    uniform float _rot;
-    uniform float dispFactor;
-    uniform float effectFactor;
-
     #include <common>
     #include <packing>
     #include <dithering_pars_fragment>

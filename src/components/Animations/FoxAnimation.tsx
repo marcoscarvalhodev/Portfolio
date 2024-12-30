@@ -3,9 +3,9 @@ import React, { useRef } from 'react';
 import { useGLTF, useAnimations, useTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { GLTF } from 'three-stdlib';
-import CrossFade, {
-  CrossFadeRefProps,
-} from '../../Shaders/CrossFade/CrossFade';
+import CrossFade from '../../Shaders/CrossFade/CrossFade';
+import PauseOutFocus from '../../hooks/pauseOutFocus';
+
 type GLTFResult = GLTF & {
   nodes: {
     Cube007: THREE.SkinnedMesh;
@@ -24,7 +24,7 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
   ) as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
 
-  const crossFadeRef = React.useRef<null | CrossFadeRefProps>(null);
+  const crossFadeRef = React.useRef<null | THREE.MeshStandardMaterial>(null);
   const [crossFadeState, setCrossFadeState] = React.useState(false);
   const FoxFired = React.useRef(false);
 
@@ -34,6 +34,20 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
     'disp_texture.jpg',
   ]);
 
+  CrossFade({
+    crossFadeState,
+    crossFadeRef,
+    texture1,
+    texture2,
+    dispTexture,
+  });
+
+  PauseOutFocus({
+    mixer,
+    setCrossFadeState,
+    time1: 6.2,
+    time2: 67,
+  });
 
   React.useLayoutEffect(() => {
     texture1.flipY = false;
@@ -50,20 +64,20 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
   });
 
   useFrame(() => {
-      const foxTime = actions['fox-rig-animation']?.time;
-  
-      if (foxTime) {
-        if (foxTime > 6.2 && foxTime < 7.2 && !FoxFired.current) {
-          setCrossFadeState(true);
-          FoxFired.current = true;
-        }
-  
-        if (foxTime > 67 && foxTime < 68 && FoxFired.current) {
-          setCrossFadeState(false);
-          FoxFired.current = false;
-        }
+    const foxTime = actions['fox-rig-animation']?.time;
+
+    if (foxTime) {
+      if (foxTime > 6.2 && foxTime < 7.2 && !FoxFired.current) {
+        setCrossFadeState(true);
+        FoxFired.current = true;
       }
-    });
+
+      if (foxTime > 67 && foxTime < 68 && FoxFired.current) {
+        setCrossFadeState(false);
+        FoxFired.current = false;
+      }
+    }
+  });
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -78,12 +92,7 @@ export function FoxAnimation(props: JSX.IntrinsicElements['group']) {
             morphTargetDictionary={nodes.Cube007.morphTargetDictionary}
             morphTargetInfluences={nodes.Cube007.morphTargetInfluences}
           >
-            <crossFadeMaterial
-              ref={crossFadeRef}
-              tex={texture1}
-              tex2={texture2}
-              disp={dispTexture}
-            />
+            <meshStandardMaterial ref={crossFadeRef} />
           </skinnedMesh>
           <primitive object={nodes.root} />
         </group>
